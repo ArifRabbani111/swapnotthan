@@ -167,31 +167,11 @@ JWT_SECRET=your_jwt_secret_key
 - `POST /api/auth/login` - Admin login
 - `POST /api/auth/logout` - Admin logout
 
-## 👥 Contributing
 
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
 
-## 📝 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🤝 Support
-
-For support and questions:
-- Email: [contact@swapnotthan.org]
-- Website: [https://swapnotthan.org]
-- Phone: [Contact number]
 
 ## 🙏 Acknowledgments
 
-- SUST (Shahjalal University of Science and Technology) community
-- All volunteers and contributors
-- Local communities in Sylhet for their trust and support
 
----
-
-**Made with ❤️ for the community by Swapnotthan Team** 
+**Made with ❤️ for the community by Arif Rabbani** 
