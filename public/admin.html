@@ -4,104 +4,311 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Panel - Swapnotthan</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="css/admin.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Admin Panel</h1>
-        
+    <div class="admin-container">
         <!-- Login Form -->
-        <div id="login-form">
-            <h2>Login</h2>
-            <form id="login">
-                <div class="form-group">
-                    <label for="username">Username</label>
-                    <input type="text" id="username" name="username" required>
+        <div id="login-form" class="login-container">
+            <div class="login-card">
+                <div class="login-header">
+                    <div class="logo">
+                        <i class="fas fa-hands-helping"></i>
+                        <span>Swapnotthan</span>
+                    </div>
+                    <h2>Admin Login</h2>
+                    <p>Enter your credentials to access the admin panel</p>
                 </div>
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" id="password" name="password" required>
+                
+                <form id="login" class="login-form">
+                    <div class="form-group">
+                        <label for="username">
+                            <i class="fas fa-user"></i>
+                            Username
+                        </label>
+                        <input type="text" id="username" name="username" placeholder="Enter your username" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="admin-password">
+                            <i class="fas fa-lock"></i>
+                            Password
+                        </label>
+                        <input type="password" id="admin-password" name="password" placeholder="Enter your password" required>
+                    </div>
+                    
+                    <button type="submit" class="btn-login">
+                        <i class="fas fa-sign-in-alt"></i>
+                        Login
+                    </button>
+                </form>
+                
+                <div class="login-footer">
+                    <p>Swapnotthan Admin Panel © 2024</p>
                 </div>
-                <button type="submit">Login</button>
-            </form>
+            </div>
         </div>
         
         <!-- Admin Dashboard -->
         <div id="admin-dashboard" style="display: none;">
-            <div class="dashboard-header">
-                <h2>Dashboard</h2>
-                <button id="logout-btn">Logout</button>
-            </div>
-            
-            <!-- Event Management -->
-            <div class="section">
-                <h3>Manage Events</h3>
-                <form id="event-form">
-                    <input type="hidden" id="event-id">
-                    <div class="form-group">
-                        <label for="event-title">Title</label>
-                        <input type="text" id="event-title" required>
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <div class="sidebar-header">
+                    <div class="logo">
+                        <i class="fas fa-hands-helping"></i>
+                        <span>Swapnotthan</span>
                     </div>
-                    <div class="form-group">
-                        <label for="event-date">Date</label>
-                        <input type="date" id="event-date" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="event-location">Location</label>
-                        <input type="text" id="event-location" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="event-description">Description</label>
-                        <textarea id="event-description" required></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="event-image">Image URL</label>
-                        <input type="text" id="event-image" required>
-                    </div>
-                    <button type="submit">Save Event</button>
-                </form>
+                    <p>Admin Panel</p>
+                </div>
                 
-                <div class="list-container">
-                    <h4>Events List</h4>
-                    <div id="events-list"></div>
+                <div class="sidebar-menu">
+                    <div class="menu-item active" data-section="dashboard">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <span>Dashboard</span>
+                    </div>
+                    <div class="menu-item" data-section="events">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>Manage Events</span>
+                    </div>
+                    <div class="menu-item" data-section="members">
+                        <i class="fas fa-users"></i>
+                        <span>Manage Team</span>
+                    </div>
+                </div>
+                
+                <div class="sidebar-footer">
+                    <button id="logout-btn" class="btn-logout">
+                        <i class="fas fa-sign-out-alt"></i>
+                        Logout
+                    </button>
                 </div>
             </div>
             
-            <!-- Member Management -->
-            <div class="section">
-                <h3>Manage Team Members</h3>
-                <form id="member-form">
-                    <input type="hidden" id="member-id">
-                    <div class="form-group">
-                        <label for="member-name">Name</label>
-                        <input type="text" id="member-name" required>
+            <!-- Main Content -->
+            <div class="main-content">
+                <!-- Header -->
+                <div class="content-header">
+                    <div class="header-left">
+                        <h1>Dashboard</h1>
+                        <p>Welcome back, Admin!</p>
                     </div>
-                    <div class="form-group">
-                        <label for="member-position">Position</label>
-                        <input type="text" id="member-position" required>
+                    <div class="header-right">
+                        <div class="user-info">
+                            <i class="fas fa-user-circle"></i>
+                            <span>Admin</span>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="member-image">Image URL</label>
-                        <input type="text" id="member-image" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="member-facebook">Facebook URL</label>
-                        <input type="text" id="member-facebook">
-                    </div>
-                    <div class="form-group">
-                        <label for="member-linkedin">LinkedIn URL</label>
-                        <input type="text" id="member-linkedin">
-                    </div>
-                    <button type="submit">Save Member</button>
-                </form>
+                </div>
                 
-                <div class="list-container">
-                    <h4>Team Members List</h4>
-                    <div id="members-list"></div>
+                <!-- Dashboard Section -->
+                <div id="dashboard-section" class="content-section">
+                    <div class="stats-container">
+                        <div class="stat-card">
+                            <div class="stat-icon blue">
+                                <i class="fas fa-calendar-alt"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3 id="events-count">0</h3>
+                                <p>Total Events</p>
+                            </div>
+                        </div>
+                        
+                        <div class="stat-card">
+                            <div class="stat-icon green">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3 id="members-count">0</h3>
+                                <p>Team Members</p>
+                            </div>
+                        </div>
+                        
+                        <div class="stat-card">
+                            <div class="stat-icon orange">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3 id="subscribers-count">0</h3>
+                                <p>Subscribers</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="quick-actions">
+                        <h2>Quick Actions</h2>
+                        <div class="action-buttons">
+                            <button class="btn-action" data-action="add-event">
+                                <i class="fas fa-plus"></i>
+                                Add New Event
+                            </button>
+                            <button class="btn-action" data-action="add-member">
+                                <i class="fas fa-user-plus"></i>
+                                Add Team Member
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Events Section -->
+                <div id="events-section" class="content-section">
+                    <div class="section-header">
+                        <h2>Manage Events</h2>
+                        <button class="btn-add" data-action="add-event">
+                            <i class="fas fa-plus"></i>
+                            Add Event
+                        </button>
+                    </div>
+                    
+                    <div class="form-container" id="event-form-container">
+                        <h3 id="event-form-title">Add New Event</h3>
+                        <form id="event-form" class="admin-form">
+                            <input type="hidden" id="event-id">
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="event-title">Event Title</label>
+                                    <input type="text" id="event-title" placeholder="Enter event title" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="event-date">Event Date</label>
+                                    <input type="date" id="event-date" required>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="event-location">Location</label>
+                                <input type="text" id="event-location" placeholder="Enter event location" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="event-description">Description</label>
+                                <textarea id="event-description" placeholder="Enter event description" rows="4" required></textarea>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="event-image">Image URL</label>
+                                <input type="text" id="event-image" placeholder="Enter image URL" required>
+                            </div>
+                            
+                            <div class="form-actions">
+                                <button type="submit" class="btn-save">
+                                    <i class="fas fa-save"></i>
+                                    Save Event
+                                </button>
+                                <button type="button" class="btn-cancel" data-cancel="event-form">
+                                    <i class="fas fa-times"></i>
+                                    Cancel
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                    
+                    <div class="table-container">
+                        <h3>Events List</h3>
+                        <div class="table-wrapper">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Title</th>
+                                        <th>Date</th>
+                                        <th>Location</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="events-table-body">
+                                    <!-- Events will be loaded here -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Members Section -->
+                <div id="members-section" class="content-section">
+                    <div class="section-header">
+                        <h2>Manage Team Members</h2>
+                        <button class="btn-add" data-action="add-member">
+                            <i class="fas fa-plus"></i>
+                            Add Member
+                        </button>
+                    </div>
+                    
+                    <div class="form-container" id="member-form-container">
+                        <h3 id="member-form-title">Add New Member</h3>
+                        <form id="member-form" class="admin-form">
+                            <input type="hidden" id="member-id">
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="member-name">Full Name</label>
+                                    <input type="text" id="member-name" placeholder="Enter full name" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="member-position">Position</label>
+                                    <input type="text" id="member-position" placeholder="Enter position" required>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="member-image">Image URL</label>
+                                <input type="text" id="member-image" placeholder="Enter image URL" required>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="member-facebook">Facebook URL</label>
+                                    <input type="text" id="member-facebook" placeholder="Enter Facebook URL">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="member-linkedin">LinkedIn URL</label>
+                                    <input type="text" id="member-linkedin" placeholder="Enter LinkedIn URL">
+                                </div>
+                            </div>
+                            
+                            <div class="form-actions">
+                                <button type="submit" class="btn-save">
+                                    <i class="fas fa-save"></i>
+                                    Save Member
+                                </button>
+                                <button type="button" class="btn-cancel" data-cancel="member-form">
+                                    <i class="fas fa-times"></i>
+                                    Cancel
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                    
+                    <div class="table-container">
+                        <h3>Team Members List</h3>
+                        <div class="table-wrapper">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Position</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="members-table-body">
+                                    <!-- Members will be loaded here -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+    
+    <!-- Notification Container -->
+    <div id="notification-container"></div>
     
     <script src="js/admin.js"></script>
 </body>

@@ -72,5 +72,64 @@ router.delete('/:id', async (req, res) => {
     res.status(500).json({ message: 'Server error' });
   }
 });
+// Get event details
+router.get('/:id/details', async (req, res) => {
+  try {
+    const [rows] = await pool.query('SELECT * FROM events WHERE id = ?', [req.params.id]);
+    if (rows.length === 0) {
+      return res.status(404).json({ message: 'Event not found' });
+    }
+    res.json(rows[0]);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+// Register for event
+router.post('/:id/register', async (req, res) => {
+  try {
+    const { name, email, phone } = req.body;
+    const eventId = req.params.id;
+    
+    // Check if already registered
+    const [existing] = await pool.query(
+      'SELECT * FROM event_registrations WHERE event_id = ? AND email = ?', 
+      [eventId, email]
+    );
+    
+    if (existing.length > 0) {
+      return res.status(409).json({ message: 'You are already registered for this event' });
+    }
+    
+    // Register the user
+    const [result] = await pool.query(
+      'INSERT INTO event_registrations (event_id, name, email, phone) VALUES (?, ?, ?, ?)',
+      [eventId, name, email, phone]
+    );
+    
+    res.status(201).json({ 
+      message: 'Registration successful', 
+      id: result.insertId 
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+// Get event registrations
+router.get('/:id/registrations', async (req, res) => {
+  try {
+    const [rows] = await pool.query(
+      'SELECT * FROM event_registrations WHERE event_id = ? ORDER BY created_at DESC',
+      [req.params.id]
+    );
+    res.json(rows);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
 
 module.exports = router;

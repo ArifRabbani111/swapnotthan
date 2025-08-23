@@ -4,16 +4,24 @@ document.addEventListener('DOMContentLoaded', function() {
     const adminDashboard = document.getElementById('admin-dashboard');
     const eventForm = document.getElementById('event-form');
     const memberForm = document.getElementById('member-form');
-    const eventsList = document.getElementById('events-list');
-    const membersList = document.getElementById('members-list');
+    const eventsList = document.getElementById('events-table-body');
+    const membersList = document.getElementById('members-table-body');
     const logoutBtn = document.getElementById('logout-btn');
+    
+    // Menu items
+    const menuItems = document.querySelectorAll('.menu-item');
+    const contentSections = document.querySelectorAll('.content-section');
+    
+    // Quick action buttons
+    const actionButtons = document.querySelectorAll('.btn-action');
+    const addButtons = document.querySelectorAll('.btn-add');
+    const cancelButtons = document.querySelectorAll('.btn-cancel');
     
     // Check if user is logged in
     const token = localStorage.getItem('adminToken');
     if (token) {
         showAdminDashboard();
-        loadEvents();
-        loadMembers();
+        loadDashboardStats();
     }
     
     // Login form submission
@@ -21,7 +29,7 @@ document.addEventListener('DOMContentLoaded', function() {
         e.preventDefault();
         
         const username = document.getElementById('username').value;
-        const password = document.getElementById('password').value;
+        const password = document.getElementById('admin-password').value;
         
         fetch('/api/auth/login', {
             method: 'POST',
@@ -35,15 +43,14 @@ document.addEventListener('DOMContentLoaded', function() {
             if (data.token) {
                 localStorage.setItem('adminToken', data.token);
                 showAdminDashboard();
-                loadEvents();
-                loadMembers();
+                loadDashboardStats();
             } else {
-                showMessage(data.message, 'error');
+                showNotification(data.message, 'error');
             }
         })
         .catch(error => {
             console.error('Error:', error);
-            showMessage('An error occurred. Please try again.', 'error');
+            showNotification('An error occurred. Please try again.', 'error');
         });
     });
     
@@ -51,6 +58,48 @@ document.addEventListener('DOMContentLoaded', function() {
     logoutBtn.addEventListener('click', function() {
         localStorage.removeItem('adminToken');
         showLoginForm();
+    });
+    
+    // Menu item clicks
+    menuItems.forEach(item => {
+        item.addEventListener('click', function() {
+            const section = this.getAttribute('data-section');
+            switchSection(section);
+        });
+    });
+    
+    // Quick action buttons
+    actionButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const action = this.getAttribute('data-action');
+            if (action === 'add-event') {
+                switchSection('events');
+                showEventForm();
+            } else if (action === 'add-member') {
+                switchSection('members');
+                showMemberForm();
+            }
+        });
+    });
+    
+    // Add buttons
+    addButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const action = this.getAttribute('data-action');
+            if (action === 'add-event') {
+                showEventForm();
+            } else if (action === 'add-member') {
+                showMemberForm();
+            }
+        });
+    });
+    
+    // Cancel buttons
+    cancelButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const formId = this.getAttribute('data-cancel');
+            hideForm(formId);
+        });
     });
     
     // Event form submission
@@ -66,7 +115,7 @@ document.addEventListener('DOMContentLoaded', function() {
             image_url: document.getElementById('event-image').value
         };
         
-        const url = eventId ? `/admin/events/${eventId}` : '/admin/events';
+        const url = eventId ? `/admin-api/events/${eventId}` : '/admin-api/events';
         const method = eventId ? 'PUT' : 'POST';
         
         fetch(url, {
@@ -79,14 +128,13 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .then(response => response.json())
         .then(data => {
-            showMessage(data.message, 'success');
-            eventForm.reset();
-            document.getElementById('event-id').value = '';
+            showNotification(data.message, 'success');
+            hideForm('event-form');
             loadEvents();
         })
         .catch(error => {
             console.error('Error:', error);
-            showMessage('An error occurred. Please try again.', 'error');
+            showNotification('An error occurred. Please try again.', 'error');
         });
     });
     
@@ -103,7 +151,7 @@ document.addEventListener('DOMContentLoaded', function() {
             linkedin_url: document.getElementById('member-linkedin').value
         };
         
-        const url = memberId ? `/admin/members/${memberId}` : '/admin/members';
+        const url = memberId ? `/admin-api/members/${memberId}` : '/admin-api/members';
         const method = memberId ? 'PUT' : 'POST';
         
         fetch(url, {
@@ -116,20 +164,116 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .then(response => response.json())
         .then(data => {
-            showMessage(data.message, 'success');
-            memberForm.reset();
-            document.getElementById('member-id').value = '';
+            showNotification(data.message, 'success');
+            hideForm('member-form');
             loadMembers();
         })
         .catch(error => {
             console.error('Error:', error);
-            showMessage('An error occurred. Please try again.', 'error');
+            showNotification('An error occurred. Please try again.', 'error');
         });
     });
     
+    // Switch between sections
+    function switchSection(sectionName) {
+        // Update menu items
+        menuItems.forEach(item => {
+            if (item.getAttribute('data-section') === sectionName) {
+                item.classList.add('active');
+            } else {
+                item.classList.remove('active');
+            }
+        });
+        
+        // Update content sections visibility explicitly
+        contentSections.forEach(section => {
+            if (section.id === `${sectionName}-section`) {
+                section.classList.add('active');
+                section.style.display = 'block';
+            } else {
+                section.classList.remove('active');
+                section.style.display = 'none';
+            }
+        });
+        
+        // Update header title
+        const headerTitle = document.querySelector('.header-left h1');
+        if (headerTitle) {
+            if (sectionName === 'dashboard') {
+                headerTitle.textContent = 'Dashboard';
+            } else if (sectionName === 'events') {
+                headerTitle.textContent = 'Manage Events';
+            } else if (sectionName === 'members') {
+                headerTitle.textContent = 'Manage Team Members';
+            }
+        }
+        
+        // Load section-specific data
+        if (sectionName === 'dashboard') {
+            loadDashboardStats();
+        } else if (sectionName === 'events') {
+            loadEvents();
+        } else if (sectionName === 'members') {
+            loadMembers();
+        }
+    }
+    
+    // Load dashboard statistics
+    function loadDashboardStats() {
+        // Load events count
+        fetch('/admin-api/events', {
+            headers: {
+                'x-auth-token': localStorage.getItem('adminToken')
+            }
+        })
+        .then(response => response.json())
+        .then(events => {
+            document.getElementById('events-count').textContent = events.length;
+        })
+        .catch(error => {
+            console.error('Error loading events count:', error);
+            document.getElementById('events-count').textContent = '0';
+        });
+        
+        // Load members count
+        fetch('/admin-api/members', {
+            headers: {
+                'x-auth-token': localStorage.getItem('adminToken')
+            }
+        })
+        .then(response => response.json())
+        .then(members => {
+            document.getElementById('members-count').textContent = members.length;
+        })
+        .catch(error => {
+            console.error('Error loading members count:', error);
+            document.getElementById('members-count').textContent = '0';
+        });
+        
+        // Load subscribers count
+        fetch('/api/subscribers', {
+            headers: {
+                'x-auth-token': localStorage.getItem('adminToken')
+            }
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Failed to fetch subscribers');
+            }
+            return response.json();
+        })
+        .then(subscribers => {
+            document.getElementById('subscribers-count').textContent = subscribers.length;
+        })
+        .catch(error => {
+            console.error('Error loading subscribers count:', error);
+            document.getElementById('subscribers-count').textContent = '0';
+        });
+    }
+    
     // Load events
     function loadEvents() {
-        fetch('/admin/events', {
+        fetch('/admin-api/events', {
             headers: {
                 'x-auth-token': localStorage.getItem('adminToken')
             }
@@ -138,36 +282,38 @@ document.addEventListener('DOMContentLoaded', function() {
         .then(events => {
             eventsList.innerHTML = '';
             
+            if (events.length === 0) {
+                eventsList.innerHTML = '<tr><td colspan="4" style="text-align: center;">No events found</td></tr>';
+                return;
+            }
+            
             events.forEach(event => {
-                const eventItem = document.createElement('div');
-                eventItem.className = 'list-item';
-                
                 const eventDate = new Date(event.date);
                 const formattedDate = eventDate.toLocaleDateString();
                 
-                eventItem.innerHTML = `
-                    <div>
-                        <h4>${event.title}</h4>
-                        <p>${formattedDate} | ${event.location}</p>
-                    </div>
-                    <div class="list-item-buttons">
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${event.title}</td>
+                    <td>${formattedDate}</td>
+                    <td>${event.location}</td>
+                    <td>
                         <button class="btn-edit" data-id="${event.id}">Edit</button>
                         <button class="btn-delete" data-id="${event.id}">Delete</button>
-                    </div>
+                    </td>
                 `;
                 
-                eventsList.appendChild(eventItem);
+                eventsList.appendChild(row);
             });
             
             // Add event listeners to edit and delete buttons
-            document.querySelectorAll('.btn-edit').forEach(button => {
+            document.querySelectorAll('#events-table-body .btn-edit').forEach(button => {
                 button.addEventListener('click', function() {
                     const eventId = this.getAttribute('data-id');
                     editEvent(eventId);
                 });
             });
             
-            document.querySelectorAll('.btn-delete').forEach(button => {
+            document.querySelectorAll('#events-table-body .btn-delete').forEach(button => {
                 button.addEventListener('click', function() {
                     const eventId = this.getAttribute('data-id');
                     deleteEvent(eventId);
@@ -176,12 +322,13 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .catch(error => {
             console.error('Error loading events:', error);
+            showNotification('Error loading events', 'error');
         });
     }
     
     // Load members
     function loadMembers() {
-        fetch('/admin/members', {
+        fetch('/admin-api/members', {
             headers: {
                 'x-auth-token': localStorage.getItem('adminToken')
             }
@@ -190,33 +337,34 @@ document.addEventListener('DOMContentLoaded', function() {
         .then(members => {
             membersList.innerHTML = '';
             
+            if (members.length === 0) {
+                membersList.innerHTML = '<tr><td colspan="3" style="text-align: center;">No members found</td></tr>';
+                return;
+            }
+            
             members.forEach(member => {
-                const memberItem = document.createElement('div');
-                memberItem.className = 'list-item';
-                
-                memberItem.innerHTML = `
-                    <div>
-                        <h4>${member.name}</h4>
-                        <p>${member.position}</p>
-                    </div>
-                    <div class="list-item-buttons">
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${member.name}</td>
+                    <td>${member.position}</td>
+                    <td>
                         <button class="btn-edit" data-id="${member.id}">Edit</button>
                         <button class="btn-delete" data-id="${member.id}">Delete</button>
-                    </div>
+                    </td>
                 `;
                 
-                membersList.appendChild(memberItem);
+                membersList.appendChild(row);
             });
             
             // Add event listeners to edit and delete buttons
-            document.querySelectorAll('.btn-edit').forEach(button => {
+            document.querySelectorAll('#members-table-body .btn-edit').forEach(button => {
                 button.addEventListener('click', function() {
                     const memberId = this.getAttribute('data-id');
                     editMember(memberId);
                 });
             });
             
-            document.querySelectorAll('.btn-delete').forEach(button => {
+            document.querySelectorAll('#members-table-body .btn-delete').forEach(button => {
                 button.addEventListener('click', function() {
                     const memberId = this.getAttribute('data-id');
                     deleteMember(memberId);
@@ -225,18 +373,27 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .catch(error => {
             console.error('Error loading members:', error);
+            showNotification('Error loading members', 'error');
         });
     }
     
     // Edit event
     function editEvent(eventId) {
-        fetch(`/admin/events/${eventId}`, {
+        console.log('Editing event with ID:', eventId);
+        
+        fetch(`/admin-api/events/${eventId}`, {
             headers: {
                 'x-auth-token': localStorage.getItem('adminToken')
             }
         })
-        .then(response => response.json())
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Failed to fetch event');
+            }
+            return response.json();
+        })
         .then(event => {
+            // Populate the form
             document.getElementById('event-id').value = event.id;
             document.getElementById('event-title').value = event.title;
             document.getElementById('event-date').value = event.date;
@@ -244,23 +401,33 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('event-description').value = event.description;
             document.getElementById('event-image').value = event.image_url;
             
-            // Scroll to form
-            eventForm.scrollIntoView({ behavior: 'smooth' });
+            document.getElementById('event-form-title').textContent = 'Edit Event';
+            document.getElementById('event-form-container').style.display = 'block';
+            document.getElementById('event-form').scrollIntoView({ behavior: 'smooth' });
         })
         .catch(error => {
             console.error('Error loading event:', error);
+            showNotification('Error loading event data', 'error');
         });
     }
     
     // Edit member
     function editMember(memberId) {
-        fetch(`/admin/members/${memberId}`, {
+        console.log('Editing member with ID:', memberId);
+        
+        fetch(`/admin-api/members/${memberId}`, {
             headers: {
                 'x-auth-token': localStorage.getItem('adminToken')
             }
         })
-        .then(response => response.json())
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Failed to fetch member');
+            }
+            return response.json();
+        })
         .then(member => {
+            // Populate the form
             document.getElementById('member-id').value = member.id;
             document.getElementById('member-name').value = member.name;
             document.getElementById('member-position').value = member.position;
@@ -268,18 +435,20 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('member-facebook').value = member.facebook_url || '';
             document.getElementById('member-linkedin').value = member.linkedin_url || '';
             
-            // Scroll to form
-            memberForm.scrollIntoView({ behavior: 'smooth' });
+            document.getElementById('member-form-title').textContent = 'Edit Member';
+            document.getElementById('member-form-container').style.display = 'block';
+            document.getElementById('member-form').scrollIntoView({ behavior: 'smooth' });
         })
         .catch(error => {
             console.error('Error loading member:', error);
+            showNotification('Error loading member data', 'error');
         });
     }
     
     // Delete event
     function deleteEvent(eventId) {
         if (confirm('Are you sure you want to delete this event?')) {
-            fetch(`/admin/events/${eventId}`, {
+            fetch(`/admin-api/events/${eventId}`, {
                 method: 'DELETE',
                 headers: {
                     'x-auth-token': localStorage.getItem('adminToken')
@@ -287,12 +456,12 @@ document.addEventListener('DOMContentLoaded', function() {
             })
             .then(response => response.json())
             .then(data => {
-                showMessage(data.message, 'success');
+                showNotification(data.message, 'success');
                 loadEvents();
             })
             .catch(error => {
                 console.error('Error deleting event:', error);
-                showMessage('An error occurred. Please try again.', 'error');
+                showNotification('An error occurred. Please try again.', 'error');
             });
         }
     }
@@ -300,7 +469,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Delete member
     function deleteMember(memberId) {
         if (confirm('Are you sure you want to delete this member?')) {
-            fetch(`/admin/members/${memberId}`, {
+            fetch(`/admin-api/members/${memberId}`, {
                 method: 'DELETE',
                 headers: {
                     'x-auth-token': localStorage.getItem('adminToken')
@@ -308,38 +477,89 @@ document.addEventListener('DOMContentLoaded', function() {
             })
             .then(response => response.json())
             .then(data => {
-                showMessage(data.message, 'success');
+                showNotification(data.message, 'success');
                 loadMembers();
             })
             .catch(error => {
                 console.error('Error deleting member:', error);
-                showMessage('An error occurred. Please try again.', 'error');
+                showNotification('An error occurred. Please try again.', 'error');
             });
+        }
+    }
+    
+    // Show event form
+    function showEventForm() {
+        document.getElementById('event-form-container').style.display = 'block';
+        document.getElementById('event-form-title').textContent = 'Add New Event';
+        eventForm.reset();
+        document.getElementById('event-id').value = '';
+        document.getElementById('event-form').scrollIntoView({ behavior: 'smooth' });
+    }
+    
+    // Show member form
+    function showMemberForm() {
+        document.getElementById('member-form-container').style.display = 'block';
+        document.getElementById('member-form-title').textContent = 'Add New Member';
+        memberForm.reset();
+        document.getElementById('member-id').value = '';
+        document.getElementById('member-form').scrollIntoView({ behavior: 'smooth' });
+    }
+    
+    // Hide form
+    function hideForm(formId) {
+        document.getElementById(`${formId}-container`).style.display = 'none';
+        if (formId === 'event-form') {
+            eventForm.reset();
+            document.getElementById('event-id').value = '';
+            document.getElementById('event-form-title').textContent = 'Add New Event';
+        } else if (formId === 'member-form') {
+            memberForm.reset();
+            document.getElementById('member-id').value = '';
+            document.getElementById('member-form-title').textContent = 'Add New Member';
         }
     }
     
     // Show admin dashboard
     function showAdminDashboard() {
         loginForm.style.display = 'none';
-        adminDashboard.style.display = 'block';
+        adminDashboard.style.display = 'flex';
+        // Ensure only dashboard visible initially
+        switchSection('dashboard');
     }
     
     // Show login form
     function showLoginForm() {
-        loginForm.style.display = 'block';
+        loginForm.style.display = 'flex';
         adminDashboard.style.display = 'none';
     }
     
-    // Show message
-    function showMessage(message, type) {
-        const messageElement = document.createElement('div');
-        messageElement.className = `message ${type}`;
-        messageElement.textContent = message;
+    // Show notification
+    function showNotification(message, type = 'info') {
+        const container = document.getElementById('notification-container');
         
-        document.querySelector('.container').prepend(messageElement);
+        const notification = document.createElement('div');
+        notification.className = `notification ${type}`;
         
+        let icon = 'fa-info-circle';
+        if (type === 'success') icon = 'fa-check-circle';
+        if (type === 'error') icon = 'fa-exclamation-circle';
+        
+        notification.innerHTML = `
+            <i class="fas ${icon}"></i>
+            <span class="message">${message}</span>
+        `;
+        
+        container.appendChild(notification);
+        
+        // Auto-remove after 5 seconds
         setTimeout(() => {
-            messageElement.remove();
+            notification.style.opacity = '0';
+            notification.style.transition = 'opacity 0.5s';
+            setTimeout(() => {
+                if (container.contains(notification)) {
+                    container.removeChild(notification);
+                }
+            }, 500);
         }, 5000);
     }
 });

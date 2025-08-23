@@ -41,3 +41,14 @@ INSERT INTO members (name, position, image_url, facebook_url, linkedin_url) VALU
 ('Maibam Darpan', 'General Secretary', 'https://picsum.photos/seed/maibam/150/150.jpg', '#', '#'),
 ('Sabrina Ahmed', 'Blood Wing Coordinator', 'https://picsum.photos/seed/sabrina/150/150.jpg', '#', '#'),
 ('Arif Rahman', 'Education Wing Head', 'https://picsum.photos/seed/arif/150/150.jpg', '#', '#');
+
+-- Event registrations table
+CREATE TABLE IF NOT EXISTS event_registrations (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  event_id INT NOT NULL,
+  name VARCHAR(100) NOT NULL,
+  email VARCHAR(100) NOT NULL,
+  phone VARCHAR(20),
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (event_id) REFERENCES events(id) ON DELETE CASCADE
+);
