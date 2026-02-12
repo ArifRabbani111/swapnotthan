@@ -23,6 +23,9 @@
 /build
 /frontend/build
 
+# duplicate backend inside frontend (use root backend/)
+/frontend/backend
+
 # misc
 .DS_Store
 *.pem
