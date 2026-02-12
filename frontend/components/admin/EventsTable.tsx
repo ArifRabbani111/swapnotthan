@@ -4,30 +4,30 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Plus, Edit, Trash2 } from "lucide-react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { TeamMemberForm } from "./TeamMemberForm";
-import { deleteTeamMember } from "@/actions/members";
+import { EventForm } from "./EventForm";
+import { deleteEvent } from "@/actions/events";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import type { EventRow } from "@/types";
 
-interface TeamMembersTableProps {
-    members: any[];
-    wings: any[];
+interface EventsTableProps {
+    events: EventRow[];
 }
 
-export function TeamMembersTable({ members, wings }: TeamMembersTableProps) {
+export function EventsTable({ events }: EventsTableProps) {
     const [isCreateOpen, setIsCreateOpen] = useState(false);
     const [isEditOpen, setIsEditOpen] = useState(false);
-    const [selectedMember, setSelectedMember] = useState<any>(null);
+    const [selectedEvent, setSelectedEvent] = useState<EventRow | null>(null);
     const router = useRouter();
 
     const onDelete = async (id: string) => {
-        if (confirm("Are you sure you want to delete this member?")) {
+        if (confirm("Are you sure you want to delete this event?")) {
             try {
-                await deleteTeamMember(id);
-                toast.success("Member deleted successfully");
+                await deleteEvent(id);
+                toast.success("Event deleted successfully");
                 router.refresh();
             } catch (error) {
-                toast.error("Failed to delete member");
+                toast.error("Failed to delete event");
             }
         }
     };
@@ -35,19 +35,19 @@ export function TeamMembersTable({ members, wings }: TeamMembersTableProps) {
     return (
         <div className="space-y-8">
             <div className="flex items-center justify-between">
-                <h2 className="text-3xl font-bold">Manage Members</h2>
+                <h2 className="text-3xl font-bold">Manage Events</h2>
                 <Dialog open={isCreateOpen} onOpenChange={setIsCreateOpen}>
                     <DialogTrigger asChild>
                         <Button className="bg-primary hover:bg-primary/90">
                             <Plus className="mr-2 h-4 w-4" />
-                            Add New Member
+                            Add New Event
                         </Button>
                     </DialogTrigger>
                     <DialogContent className="max-w-2xl">
                         <DialogHeader>
-                            <DialogTitle>Add New Team Member</DialogTitle>
+                            <DialogTitle>Create New Event</DialogTitle>
                         </DialogHeader>
-                        <TeamMemberForm wings={wings} onSuccess={() => setIsCreateOpen(false)} />
+                        <EventForm onSuccess={() => setIsCreateOpen(false)} />
                     </DialogContent>
                 </Dialog>
             </div>
@@ -57,40 +57,38 @@ export function TeamMembersTable({ members, wings }: TeamMembersTableProps) {
                     <table className="w-full text-sm text-left">
                         <thead className="bg-muted text-muted-foreground uppercase text-xs">
                             <tr>
-                                <th className="px-6 py-4">Name</th>
-                                <th className="px-6 py-4">Role</th>
-                                <th className="px-6 py-4">Wing</th>
+                                <th className="px-6 py-4">Title</th>
+                                <th className="px-6 py-4">Date</th>
+                                <th className="px-6 py-4">Location</th>
                                 <th className="px-6 py-4 text-right">Actions</th>
                             </tr>
                         </thead>
                         <tbody className="divide-y">
-                            {members.length === 0 ? (
+                            {events.length === 0 ? (
                                 <tr>
                                     <td colSpan={4} className="px-6 py-10 text-center text-muted-foreground italic text-base">
-                                        No members found.
+                                        No events found. Start by creating one!
                                     </td>
                                 </tr>
                             ) : (
-                                members.map((member) => (
-                                    <tr key={member.id} className="hover:bg-muted/30 transition-colors">
-                                        <td className="px-6 py-4 font-semibold text-foreground">{member.name}</td>
-                                        <td className="px-6 py-4 text-muted-foreground">{member.role}</td>
-                                        <td className="px-6 py-4">
-                                            {member.wing ? (
-                                                <span className="px-2 py-1 rounded-full bg-secondary/10 text-secondary text-xs font-bold">
-                                                    {member.wing.name}
-                                                </span>
-                                            ) : (
-                                                <span className="text-muted-foreground italic text-xs">General</span>
-                                            )}
+                                events.map((event) => (
+                                    <tr key={event.id} className="hover:bg-muted/30 transition-colors">
+                                        <td className="px-6 py-4 font-semibold text-foreground">{event.title}</td>
+                                        <td className="px-6 py-4 text-muted-foreground">
+                                            {event.date ? new Date(event.date).toLocaleDateString("en-GB", {
+                                                day: "numeric",
+                                                month: "short",
+                                                year: "numeric"
+                                            }) : "N/A"}
                                         </td>
+                                        <td className="px-6 py-4 text-muted-foreground">{event.location || "N/A"}</td>
                                         <td className="px-6 py-4 text-right space-x-2">
                                             <Button
                                                 variant="ghost"
                                                 size="icon"
                                                 className="text-secondary hover:text-secondary/20 hover:bg-secondary/10"
                                                 onClick={() => {
-                                                    setSelectedMember(member);
+                                                    setSelectedEvent(event);
                                                     setIsEditOpen(true);
                                                 }}
                                             >
@@ -100,7 +98,7 @@ export function TeamMembersTable({ members, wings }: TeamMembersTableProps) {
                                                 variant="ghost"
                                                 size="icon"
                                                 className="text-destructive hover:text-destructive/20 hover:bg-destructive/10"
-                                                onClick={() => onDelete(member.id)}
+                                                onClick={() => onDelete(event.id)}
                                             >
                                                 <Trash2 size={16} />
                                             </Button>
@@ -116,15 +114,14 @@ export function TeamMembersTable({ members, wings }: TeamMembersTableProps) {
             <Dialog open={isEditOpen} onOpenChange={setIsEditOpen}>
                 <DialogContent className="max-w-2xl">
                     <DialogHeader>
-                        <DialogTitle>Edit Team Member</DialogTitle>
+                        <DialogTitle>Edit Event</DialogTitle>
                     </DialogHeader>
-                    {selectedMember && (
-                        <TeamMemberForm
-                            initialData={selectedMember}
-                            wings={wings}
+                    {selectedEvent && (
+                        <EventForm
+                            initialData={selectedEvent}
                             onSuccess={() => {
                                 setIsEditOpen(false);
-                                setSelectedMember(null);
+                                setSelectedEvent(null);
                             }}
                         />
                     )}

@@ -19,7 +19,6 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
                 try {
                     const [user] = await db.select().from(users).where(eq(users.id, token.sub));
                     if (user) {
-                        // @ts-ignore
                         session.user.role = user.role;
                     }
                 } catch (error) {

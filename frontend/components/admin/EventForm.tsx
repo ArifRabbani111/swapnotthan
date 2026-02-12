@@ -24,11 +24,12 @@ import { useState } from "react";
 import { createEvent, updateEvent } from "@/actions/events";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import type { EventRow } from "@/types";
 
 type EventFormValues = z.infer<typeof eventSchema>;
 
 interface EventFormProps {
-    initialData?: any;
+    initialData?: EventRow | null;
     onSuccess?: () => void;
 }
 
@@ -41,11 +42,13 @@ export function EventForm({ initialData, onSuccess }: EventFormProps) {
         defaultValues: initialData ? {
             ...initialData,
             date: initialData.date ? new Date(initialData.date) : undefined,
-            description: initialData.description || "",
+            description: initialData.description ?? "",
+            imageUrl: initialData.imageUrl ?? "",
         } : {
             title: "",
             slug: "",
             description: "",
+            date: undefined,
             location: "",
             imageUrl: "",
         },

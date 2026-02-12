@@ -1,0 +1,26 @@
+# Backend is separate (Node/Express) - deploy elsewhere
+backend
+
+# Duplicate / legacy frontend copy
+frontend
+
+# Dependencies (reinstalled on Vercel)
+node_modules
+
+# Env files (configure in Vercel dashboard, not in repo)
+.env
+.env.local
+.env.*.local
+
+# Git
+.git
+
+# Dev / tooling
+*.log
+.cursor
+.vscode
+coverage
+.next
+
+# Drizzle migrations (keep if you run db:push from CI; exclude to slim deploy)
+# db/migrations

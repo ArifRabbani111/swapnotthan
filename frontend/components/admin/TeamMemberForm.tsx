@@ -27,12 +27,13 @@ import { useState } from "react";
 import { createTeamMember, updateTeamMember } from "@/actions/members";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import type { TeamMemberWithWing, WingRow } from "@/types";
 
 type TeamMemberFormValues = z.infer<typeof teamMemberSchema>;
 
 interface TeamMemberFormProps {
-    initialData?: any;
-    wings: any[];
+    initialData?: TeamMemberWithWing | null;
+    wings: WingRow[];
     onSuccess?: () => void;
 }
 
@@ -42,13 +43,19 @@ export function TeamMemberForm({ initialData, wings, onSuccess }: TeamMemberForm
 
     const form = useForm<TeamMemberFormValues>({
         resolver: zodResolver(teamMemberSchema),
-        defaultValues: initialData || {
-            name: "",
-            role: "",
-            bio: "",
-            imageUrl: "",
-            wingId: undefined,
-        },
+        defaultValues: initialData
+            ? {
+                ...initialData,
+                bio: initialData.bio ?? "",
+                imageUrl: initialData.imageUrl ?? "",
+              }
+            : {
+                name: "",
+                role: "",
+                bio: "",
+                imageUrl: "",
+                wingId: undefined,
+            },
     });
 
     async function onSubmit(values: TeamMemberFormValues) {

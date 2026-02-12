@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
+import { logout } from "@/actions/auth-client";
 import {
     LayoutDashboard,
     Calendar,
@@ -71,7 +72,11 @@ export function AdminSidebar() {
             </nav>
 
             <div className="p-4 border-t">
-                <button className="flex items-center gap-3 w-full px-4 py-3 rounded-lg text-sm font-medium text-destructive hover:bg-destructive/10 transition-colors">
+                <button
+                    type="button"
+                    onClick={() => logout()}
+                    className="flex items-center gap-3 w-full px-4 py-3 rounded-lg text-sm font-medium text-destructive hover:bg-destructive/10 transition-colors"
+                >
                     <LogOut size={20} />
                     Logout
                 </button>

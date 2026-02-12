@@ -22,6 +22,7 @@ import {
     CommandShortcut,
 } from "@/components/ui/command";
 import { useRouter } from "next/navigation";
+import { logout } from "@/actions/auth-client";
 
 export function CommandMenu() {
     const [open, setOpen] = React.useState(false);
@@ -85,7 +86,7 @@ export function CommandMenu() {
                             <span>Settings</span>
                             <CommandShortcut>⌘S</CommandShortcut>
                         </CommandItem>
-                        <CommandItem onSelect={() => runCommand(() => console.log("Logout"))}>
+                        <CommandItem onSelect={() => runCommand(() => logout())}>
                             <LogOut className="mr-2 h-4 w-4 text-destructive" />
                             <span className="text-destructive">Logout</span>
                         </CommandItem>

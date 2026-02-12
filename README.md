@@ -1,36 +1,42 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Swapnotthan
 
-## Getting Started
+Monorepo: **frontend** (Next.js) and **backend** (Express API).
 
-First, run the development server:
+## Project structure
+
+- **`frontend/`** — Next.js app (pages, dashboard, auth). Run and deploy from here.
+- **`backend/`** — Express + MongoDB API. Deploy separately (e.g. Railway, Render).
+
+## Getting started
+
+### Frontend (Next.js)
 
 ```bash
+cd frontend
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Backend (Express)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+cd backend
+npm install
+# Set MONGO_URI etc. in .env
+npm run dev
+```
 
-## Learn More
+## Deploy on Vercel (frontend only)
 
-To learn more about Next.js, take a look at the following resources:
+1. **Import** the repo at [Vercel](https://vercel.com/new).
+2. Set **Root Directory** to **`frontend`** (Project Settings → General).
+3. Add **Environment variables** (Settings → Environment Variables):
+   - `DATABASE_URL` — PostgreSQL (Vercel Postgres, Neon, Supabase)
+   - `AUTH_SECRET` or `NEXTAUTH_SECRET` — e.g. `openssl rand -base64 32`
+   - `NEXTAUTH_URL` — `https://your-project.vercel.app`
+   - `AUTH_GOOGLE_ID`, `AUTH_GOOGLE_SECRET` — from [Google Cloud Console](https://console.cloud.google.com/)
+4. Deploy. Vercel will run `npm install` and `npm run build` inside `frontend/`.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Deploy the **backend** to Railway, Render, or another Node host.
