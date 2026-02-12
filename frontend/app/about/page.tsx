@@ -1,4 +1,7 @@
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import Link from "next/link";
+import Image from "next/image";
 import { Heart, Target, Eye, Shield } from "lucide-react";
 
 export default function AboutPage() {
@@ -13,19 +16,24 @@ export default function AboutPage() {
                             A Dream for a <br /> <span className="text-primary italic">Better Future</span>
                         </h1>
                         <p className="text-lg text-muted-foreground leading-relaxed">
-                            Swapnotthan is more than just an organization; it's a movement born from the desire to uplift those around us. We believe that collective small actions lead to massive positive transformations.
+                            Swapnotthan is more than just an organization; it&apos;s a movement born from the desire to uplift those around us. We believe that collective small actions lead to massive positive transformations.
                         </p>
                         <div className="flex gap-4">
-                            <Button size="lg" className="rounded-full px-8">Our History</Button>
-                            <Button size="lg" variant="outline" className="rounded-full px-8 border-primary text-primary">Get Involved</Button>
+                            <Button size="lg" className="rounded-full px-8" asChild>
+                                <Link href="/about#values">Our History</Link>
+                            </Button>
+                            <Button size="lg" variant="outline" className="rounded-full px-8 border-primary text-primary" asChild>
+                                <Link href="/volunteer">Get Involved</Link>
+                            </Button>
                         </div>
                     </div>
                     <div className="relative">
-                        <div className="aspect-square bg-primary/10 rounded-3xl overflow-hidden shadow-2xl">
-                            <img
+                        <div className="aspect-square bg-primary/10 rounded-3xl overflow-hidden shadow-2xl relative">
+                            <Image
                                 src="https://images.unsplash.com/photo-1593113598332-cd288d6444f1?q=80&w=800"
                                 alt="About Swapnotthan"
-                                className="w-full h-full object-cover"
+                                fill
+                                className="object-cover"
                             />
                         </div>
                         <div className="absolute -bottom-6 -left-6 bg-accent p-8 rounded-2xl shadow-xl hidden md:block">
@@ -57,7 +65,7 @@ export default function AboutPage() {
             </section>
 
             {/* Core Values */}
-            <section className="py-24 bg-muted/20">
+            <section id="values" className="py-24 bg-muted/20">
                 <div className="container mx-auto px-4 text-center mb-16 space-y-4">
                     <h2 className="text-4xl font-bold">Our Core Values</h2>
                     <p className="text-muted-foreground">What drives us every single day.</p>
@@ -84,13 +92,3 @@ export default function AboutPage() {
         </div>
     );
 }
-
-function Badge({ children, className }: { children: React.ReactNode, className?: string }) {
-    return (
-        <span className={cn("px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider", className)}>
-            {children}
-        </span>
-    );
-}
-
-import { cn } from "@/lib/utils";

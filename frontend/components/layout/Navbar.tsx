@@ -45,9 +45,11 @@ export function Navbar() {
                 </nav>
 
                 <div className="flex items-center md:ml-8">
-                    <Button className="rounded-full bg-primary hover:bg-primary/90">
-                        <Phone className="mr-2 h-4 w-4" />
-                        Call now
+                    <Button className="rounded-full bg-primary hover:bg-primary/90" asChild>
+                        <Link href="/contact">
+                            <Phone className="mr-2 h-4 w-4" />
+                            Contact
+                        </Link>
                     </Button>
                 </div>
             </div>

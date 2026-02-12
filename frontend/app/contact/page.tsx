@@ -1,8 +1,5 @@
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Card, CardContent } from "@/components/ui/card";
-import { Mail, Phone, MapPin, Send } from "lucide-react";
+import { Mail, Phone, MapPin } from "lucide-react";
+import { ContactForm } from "@/components/sections/ContactForm";
 
 export default function ContactPage() {
     return (
@@ -62,32 +59,7 @@ export default function ContactPage() {
 
                         {/* Contact Form */}
                         <div className="lg:col-span-2">
-                            <Card className="border-none shadow-2xl p-8 rounded-3xl">
-                                <CardContent className="p-0 space-y-8">
-                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                        <div className="space-y-2">
-                                            <label className="text-sm font-bold">Full Name</label>
-                                            <Input placeholder="John Doe" className="rounded-xl border-muted ring-offset-primary" />
-                                        </div>
-                                        <div className="space-y-2">
-                                            <label className="text-sm font-bold">Email Address</label>
-                                            <Input placeholder="john@example.com" className="rounded-xl border-muted ring-offset-primary" />
-                                        </div>
-                                    </div>
-                                    <div className="space-y-2">
-                                        <label className="text-sm font-bold">Subject</label>
-                                        <Input placeholder="How can we help?" className="rounded-xl border-muted ring-offset-primary" />
-                                    </div>
-                                    <div className="space-y-2">
-                                        <label className="text-sm font-bold">Message</label>
-                                        <Textarea placeholder="Write your message here..." className="rounded-xl border-muted ring-offset-primary min-h-[200px]" />
-                                    </div>
-                                    <Button size="lg" className="w-full md:w-auto px-12 rounded-full bg-primary hover:bg-primary/90 text-lg font-bold py-6">
-                                        <Send className="mr-3 h-5 w-5" />
-                                        Send Message
-                                    </Button>
-                                </CardContent>
-                            </Card>
+                            <ContactForm />
                         </div>
                     </div>
                 </div>

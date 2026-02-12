@@ -37,7 +37,7 @@ export function Footer() {
                         <ul className="space-y-4 text-sm opacity-90">
                             <li><Link href="/events" className="hover:translate-x-1 transition-transform inline-block">Events</Link></li>
                             <li><Link href="/members" className="hover:translate-x-1 transition-transform inline-block">Members</Link></li>
-                            <li><Link href="/blog" className="hover:translate-x-1 transition-transform inline-block">Latest News</Link></li>
+                            <li><Link href="/news" className="hover:translate-x-1 transition-transform inline-block">Latest News</Link></li>
                             <li><Link href="/gallery" className="hover:translate-x-1 transition-transform inline-block">Gallery</Link></li>
                         </ul>
                     </div>
