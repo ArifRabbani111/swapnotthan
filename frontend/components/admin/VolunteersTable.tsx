@@ -7,8 +7,9 @@ import { updateVolunteerStatus, deleteVolunteer } from "@/actions/volunteers";
 import { toast } from "sonner";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import type { VolunteerRow } from "@/types";
 
-export function VolunteersTable({ volunteers }: { volunteers: any[] }) {
+export function VolunteersTable({ volunteers }: { volunteers: VolunteerRow[] }) {
     const [loading, setLoading] = useState<string | null>(null);
     const router = useRouter();
 

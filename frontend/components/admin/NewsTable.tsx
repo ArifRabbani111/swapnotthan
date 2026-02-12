@@ -8,10 +8,11 @@ import { NewsForm } from "./NewsForm";
 import { deleteNewsItem } from "@/actions/news";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import type { NewsRow } from "@/types";
 
-export function NewsTable({ news }: { news: any[] }) {
+export function NewsTable({ news }: { news: NewsRow[] }) {
     const [isEditOpen, setIsEditOpen] = useState(false);
-    const [selectedItem, setSelectedItem] = useState<any>(null);
+    const [selectedItem, setSelectedItem] = useState<NewsRow | null>(null);
     const [loading, setLoading] = useState<string | null>(null);
     const router = useRouter();
 

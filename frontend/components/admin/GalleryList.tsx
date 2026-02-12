@@ -7,8 +7,9 @@ import { toast } from "sonner";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import type { GalleryRow } from "@/types";
 
-export function GalleryList({ items }: { items: any[] }) {
+export function GalleryList({ items }: { items: GalleryRow[] }) {
     const [loading, setLoading] = useState<string | null>(null);
     const router = useRouter();
 

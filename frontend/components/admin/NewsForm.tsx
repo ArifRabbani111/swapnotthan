@@ -20,11 +20,12 @@ import { useState } from "react";
 import { createNewsItem, updateNewsItem } from "@/actions/news";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import type { NewsRow } from "@/types";
 
 type NewsFormValues = z.infer<typeof newsSchema>;
 
 interface NewsFormProps {
-    initialData?: any;
+    initialData?: NewsRow | null;
     onSuccess?: () => void;
 }
 
@@ -34,10 +35,9 @@ export function NewsForm({ initialData, onSuccess }: NewsFormProps) {
 
     const form = useForm<NewsFormValues>({
         resolver: zodResolver(newsSchema),
-        defaultValues: initialData ? {
-            ...initialData,
-            content: initialData.content || "",
-        } : {
+        defaultValues: initialData
+            ? { ...initialData, content: initialData.content ?? "", imageUrl: initialData.imageUrl ?? "" }
+            : {
             title: "",
             content: "",
             imageUrl: "",

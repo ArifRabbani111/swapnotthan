@@ -8,8 +8,9 @@ import { updateHeroBackground } from "@/actions/settings";
 import { toast } from "sonner";
 import { Loader2, ImageIcon } from "lucide-react";
 import Image from "next/image";
+import type { SiteSettingsRow } from "@/types";
 
-export function SettingsForm({ initialData }: { initialData: any }) {
+export function SettingsForm({ initialData }: { initialData?: SiteSettingsRow | null }) {
     const [loading, setLoading] = useState(false);
     const [bgUrl, setBgUrl] = useState(initialData?.heroBackgroundImageUrl || "");
 

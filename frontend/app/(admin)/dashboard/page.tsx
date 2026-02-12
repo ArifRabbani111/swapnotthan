@@ -1,10 +1,11 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Calendar, Users, Heart, Layers } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 import { getDashboardStats } from "@/actions/stats";
 import { getDonations } from "@/actions/donations";
 import { getEvents } from "@/actions/events";
 
-const iconMap: Record<string, any> = {
+const iconMap: Record<string, LucideIcon> = {
     calendar: Calendar,
     users: Users,
     heart: Heart,

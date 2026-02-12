@@ -8,15 +8,16 @@ import { WingForm } from "./WingForm";
 import { deleteWing } from "@/actions/wings";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import type { WingRow } from "@/types";
 
 interface WingsTableProps {
-    wings: any[];
+    wings: WingRow[];
 }
 
 export function WingsTable({ wings }: WingsTableProps) {
     const [isCreateOpen, setIsCreateOpen] = useState(false);
     const [isEditOpen, setIsEditOpen] = useState(false);
-    const [selectedWing, setSelectedWing] = useState<any>(null);
+    const [selectedWing, setSelectedWing] = useState<WingRow | null>(null);
     const router = useRouter();
 
     const onDelete = async (id: string) => {

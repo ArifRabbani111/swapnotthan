@@ -13,9 +13,10 @@ import {
     SelectTrigger,
     SelectValue
 } from "@/components/ui/select";
+import type { DonationWithEvent } from "@/types";
 
 interface DonationsTableProps {
-    donations: any[];
+    donations: DonationWithEvent[];
 }
 
 export function DonationsTable({ donations }: DonationsTableProps) {

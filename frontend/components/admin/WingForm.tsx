@@ -20,11 +20,12 @@ import { useState } from "react";
 import { createWing, updateWing } from "@/actions/wings";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import type { WingRow } from "@/types";
 
 type WingFormValues = z.infer<typeof wingSchema>;
 
 interface WingFormProps {
-    initialData?: any;
+    initialData?: WingRow | null;
     onSuccess?: () => void;
 }
 
@@ -34,11 +35,9 @@ export function WingForm({ initialData, onSuccess }: WingFormProps) {
 
     const form = useForm<WingFormValues>({
         resolver: zodResolver(wingSchema),
-        defaultValues: initialData || {
-            name: "",
-            description: "",
-            imageUrl: "",
-        },
+        defaultValues: initialData
+            ? { ...initialData, description: initialData.description ?? "", imageUrl: initialData.imageUrl ?? "" }
+            : { name: "", description: "", imageUrl: "" },
     });
 
     async function onSubmit(values: WingFormValues) {
