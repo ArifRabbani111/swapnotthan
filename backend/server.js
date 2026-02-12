@@ -14,7 +14,18 @@ connectDB();
 
 const app = express();
 
-app.use(cors({ origin: process.env.CLIENT_URL || '*', credentials: true }));
+const allowedOrigins = [
+  'http://localhost:3000',
+  'http://localhost:3002',
+  process.env.CLIENT_URL,
+].filter(Boolean);
+app.use(cors({
+  origin: (origin, cb) => {
+    if (!origin || allowedOrigins.includes(origin)) return cb(null, true);
+    return cb(null, false);
+  },
+  credentials: true,
+}));
 app.use(express.json());
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 

@@ -1,5 +1,22 @@
 # Run the frontend
 
+## Quick fix: Connection Failed / ERR_CONNECTION_RESET
+
+If the browser shows **Connection Failed** on localhost:3000 or 3002:
+
+1. **Stop all Node processes** (so one clean server can run):
+   ```bash
+   taskkill /F /IM node.exe
+   ```
+2. **Start the frontend with a clean lock:**
+   ```bash
+   cd "c:\Users\Dell\OneDrive\Documents\Chat App\swapnotthan\frontend"
+   npm run dev:fresh
+   ```
+3. Open the URL shown in the terminal (usually **http://localhost:3000**).
+
+---
+
 ## "Unable to acquire lock" or "another instance of next dev running"
 
 Another `npm run dev` is already running. Do one of the following:
