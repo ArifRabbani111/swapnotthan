@@ -44,6 +44,7 @@ export function EventForm({ initialData, onSuccess }: EventFormProps) {
             date: initialData.date ? new Date(initialData.date) : undefined,
             description: initialData.description ?? "",
             imageUrl: initialData.imageUrl ?? "",
+            location: initialData.location ?? undefined,
         } : {
             title: "",
             slug: "",

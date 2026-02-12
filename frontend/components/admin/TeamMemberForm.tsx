@@ -48,6 +48,7 @@ export function TeamMemberForm({ initialData, wings, onSuccess }: TeamMemberForm
                 ...initialData,
                 bio: initialData.bio ?? "",
                 imageUrl: initialData.imageUrl ?? "",
+                wingId: initialData.wingId ?? undefined,
               }
             : {
                 name: "",

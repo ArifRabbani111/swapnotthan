@@ -65,7 +65,7 @@ export function VolunteersTable({ volunteers }: { volunteers: VolunteerRow[] }) 
                                 <tr key={volunteer.id} className="hover:bg-muted/30 transition-colors">
                                     <td className="px-6 py-4">
                                         <div className="font-semibold text-foreground">{volunteer.name}</div>
-                                        <div className="text-xs text-muted-foreground max-w-[300px] truncate" title={volunteer.bio}>
+                                        <div className="text-xs text-muted-foreground max-w-[300px] truncate" title={volunteer.bio ?? undefined}>
                                             {volunteer.bio}
                                         </div>
                                     </td>

@@ -19,7 +19,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
                 if (hasDatabase) {
                     try {
                         const [user] = await db.select().from(users).where(eq(users.id, token.sub));
-                        if (user) session.user.role = user.role;
+                        if (user && user.role != null) session.user.role = user.role;
                     } catch (error) {
                         console.error("Error fetching user role for session:", error);
                     }

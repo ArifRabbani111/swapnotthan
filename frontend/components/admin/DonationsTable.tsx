@@ -91,7 +91,7 @@ export function DonationsTable({ donations }: DonationsTableProps) {
                                         </td>
                                         <td className="px-6 py-4">
                                             <Select
-                                                defaultValue={donation.status}
+                                                defaultValue={donation.status ?? undefined}
                                                 onValueChange={(val) => onStatusChange(donation.id, val)}
                                                 disabled={loadingId === donation.id}
                                             >
