@@ -6,10 +6,15 @@ import { getSiteSettings } from "@/actions/settings";
 import Link from "next/link";
 
 export default async function Home() {
-  const [events, settings] = await Promise.all([
-    getEvents(),
-    getSiteSettings(),
-  ]);
+  let events: Awaited<ReturnType<typeof getEvents>> = [];
+  let settings: Awaited<ReturnType<typeof getSiteSettings>> = null;
+  try {
+    const [e, s] = await Promise.all([getEvents(), getSiteSettings()]);
+    events = e;
+    settings = s;
+  } catch (err) {
+    console.error("Home page data fetch error:", err);
+  }
 
   return (
     <div className="flex flex-col w-full">

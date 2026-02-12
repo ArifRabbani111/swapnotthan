@@ -2,8 +2,9 @@ const Event = require('../models/Event');
 
 const createEvent = async (req, res) => {
   try {
-    const { title, description, date, status } = req.body;
-    const image = req.file ? `/uploads/${req.file.filename}` : '';
+    const { title, description, date, category, eventType } = req.body;
+    const coverImage = req.files?.coverImage?.[0] ? `/uploads/${req.files.coverImage[0].filename}` : '';
+    const galleryImages = (req.files?.galleryImages || []).map((f) => `/uploads/${f.filename}`);
 
     if (!title || !date) {
       return res.status(400).json({
@@ -15,9 +16,11 @@ const createEvent = async (req, res) => {
     const event = await Event.create({
       title,
       description: description || '',
-      image,
+      coverImage,
+      galleryImages,
       date,
-      status: status || 'upcoming',
+      category: category || 'featured',
+      eventType: eventType || 'new',
     });
 
     res.status(201).json({
@@ -34,10 +37,13 @@ const createEvent = async (req, res) => {
 
 const getEvents = async (req, res) => {
   try {
-    const { status } = req.query;
+    const { category, eventType } = req.query;
     const filter = {};
-    if (status && ['running', 'upcoming', 'finished'].includes(status)) {
-      filter.status = status;
+    if (category && ['featured', 'previous'].includes(category)) {
+      filter.category = category;
+    }
+    if (eventType && ['new', 'old'].includes(eventType)) {
+      filter.eventType = eventType;
     }
 
     const events = await Event.find(filter).sort({ date: -1 });
@@ -65,14 +71,19 @@ const updateEvent = async (req, res) => {
       });
     }
 
-    const { title, description, date, status } = req.body;
-    if (req.file) {
-      event.image = `/uploads/${req.file.filename}`;
+    const { title, description, date, category, eventType } = req.body;
+    if (req.files?.coverImage?.[0]) {
+      event.coverImage = `/uploads/${req.files.coverImage[0].filename}`;
+    }
+    if (req.files?.galleryImages?.length) {
+      const newGallery = (req.files.galleryImages || []).map((f) => `/uploads/${f.filename}`);
+      event.galleryImages = [...(event.galleryImages || []), ...newGallery];
     }
     if (title !== undefined) event.title = title;
     if (description !== undefined) event.description = description;
     if (date !== undefined) event.date = date;
-    if (status !== undefined) event.status = status;
+    if (category !== undefined) event.category = category;
+    if (eventType !== undefined) event.eventType = eventType;
 
     await event.save();
 

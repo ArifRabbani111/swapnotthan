@@ -18,7 +18,7 @@ git push origin main
 
 1. Go to [vercel.com/new](https://vercel.com/new).
 2. Import your GitHub repo.
-3. **Important:** Set **Root Directory** to **`frontend`**:
+3. **Critical (fixes "ENOENT package.json"):** Set **Root Directory** to **`frontend`**:
    - Click **Edit** next to “Root Directory”.
    - Enter `frontend` and confirm.
 4. Add **Environment Variables** (before deploying):

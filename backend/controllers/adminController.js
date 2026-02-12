@@ -3,30 +3,31 @@ const Member = require('../models/Member');
 
 const getStats = async (req, res) => {
   try {
-    const [totalEvents, runningEvents, upcomingEvents, finishedEvents, totalMembers, committeeWiseCount] =
-      await Promise.all([
-        Event.countDocuments(),
-        Event.countDocuments({ status: 'running' }),
-        Event.countDocuments({ status: 'upcoming' }),
-        Event.countDocuments({ status: 'finished' }),
-        Member.countDocuments(),
-        Member.aggregate([{ $group: { _id: '$committeeYear', count: { $sum: 1 } } }]),
-      ]);
-
-    const committeeWiseCountMap = committeeWiseCount.reduce((acc, item) => {
-      acc[item._id] = item.count;
-      return acc;
-    }, {});
+    const [
+      totalEvents,
+      totalFeaturedEvents,
+      totalPreviousEvents,
+      totalMembers,
+      totalCurrentBatch,
+      totalNewBatch,
+    ] = await Promise.all([
+      Event.countDocuments(),
+      Event.countDocuments({ category: 'featured' }),
+      Event.countDocuments({ category: 'previous' }),
+      Member.countDocuments(),
+      Member.countDocuments({ batchType: 'current' }),
+      Member.countDocuments({ batchType: 'new' }),
+    ]);
 
     res.status(200).json({
       success: true,
       data: {
         totalEvents,
-        runningEvents,
-        upcomingEvents,
-        finishedEvents,
+        totalFeaturedEvents,
+        totalPreviousEvents,
         totalMembers,
-        committeeWiseCount: committeeWiseCountMap,
+        totalCurrentBatch,
+        totalNewBatch,
       },
     });
   } catch (error) {

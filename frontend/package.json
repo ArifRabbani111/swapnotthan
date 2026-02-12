@@ -4,8 +4,10 @@
   "private": true,
   "engines": { "node": ">=18 <=22" },
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --webpack",
+    "dev:turbo": "next dev",
     "dev:fresh": "node scripts/dev-fresh.js",
+    "dev:unlock": "node scripts/dev-unlock.js",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",

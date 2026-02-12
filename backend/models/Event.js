@@ -11,18 +11,27 @@ const eventSchema = new mongoose.Schema(
       type: String,
       default: '',
     },
-    image: {
+    coverImage: {
       type: String,
       default: '',
+    },
+    galleryImages: {
+      type: [String],
+      default: [],
     },
     date: {
       type: Date,
       required: true,
     },
-    status: {
+    category: {
       type: String,
-      enum: ['running', 'upcoming', 'finished'],
-      default: 'upcoming',
+      enum: ['featured', 'previous'],
+      default: 'featured',
+    },
+    eventType: {
+      type: String,
+      enum: ['new', 'old'],
+      default: 'new',
     },
   },
   { timestamps: true }

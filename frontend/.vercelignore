@@ -1,8 +1,6 @@
 # Backend is separate (Node/Express) - deploy elsewhere
+# (Only relevant when building from repo root; backend is outside frontend/)
 backend
-
-# Duplicate / legacy frontend copy
-frontend
 
 # Dependencies (reinstalled on Vercel)
 node_modules

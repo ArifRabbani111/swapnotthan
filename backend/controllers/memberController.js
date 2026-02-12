@@ -2,36 +2,23 @@ const Member = require('../models/Member');
 
 const createMember = async (req, res) => {
   try {
-    const { name, designation, bio, committeeYear, socialLinks } = req.body;
+    const { name, email, mobileNumber, facebookId, batchType } = req.body;
     const photo = req.file ? `/uploads/${req.file.filename}` : '';
 
-    if (!name || !committeeYear) {
+    if (!name) {
       return res.status(400).json({
         success: false,
-        message: 'Name and committee year are required',
+        message: 'Name is required',
       });
-    }
-
-    let social = {};
-    if (socialLinks) {
-      try {
-        social = typeof socialLinks === 'string' ? JSON.parse(socialLinks) : socialLinks;
-      } catch (e) {
-        social = {};
-      }
     }
 
     const member = await Member.create({
       name,
-      designation: designation || '',
       photo,
-      bio: bio || '',
-      committeeYear,
-      socialLinks: {
-        facebook: social.facebook || '',
-        linkedin: social.linkedin || '',
-        twitter: social.twitter || '',
-      },
+      email: email || '',
+      mobileNumber: mobileNumber || '',
+      facebookId: facebookId || '',
+      batchType: batchType || 'current',
     });
 
     res.status(201).json({
@@ -48,10 +35,10 @@ const createMember = async (req, res) => {
 
 const getMembers = async (req, res) => {
   try {
-    const { committeeYear } = req.query;
+    const { batchType } = req.query;
     const filter = {};
-    if (committeeYear) {
-      filter.committeeYear = committeeYear;
+    if (batchType && ['current', 'new'].includes(batchType)) {
+      filter.batchType = batchType;
     }
 
     const members = await Member.find(filter).sort({ createdAt: -1 });
@@ -79,24 +66,15 @@ const updateMember = async (req, res) => {
       });
     }
 
-    const { name, designation, bio, committeeYear, socialLinks } = req.body;
+    const { name, email, mobileNumber, facebookId, batchType } = req.body;
     if (req.file) {
       member.photo = `/uploads/${req.file.filename}`;
     }
     if (name !== undefined) member.name = name;
-    if (designation !== undefined) member.designation = designation;
-    if (bio !== undefined) member.bio = bio;
-    if (committeeYear !== undefined) member.committeeYear = committeeYear;
-    if (socialLinks !== undefined) {
-      try {
-        const social = typeof socialLinks === 'string' ? JSON.parse(socialLinks) : socialLinks;
-        member.socialLinks = {
-          facebook: social.facebook ?? member.socialLinks.facebook,
-          linkedin: social.linkedin ?? member.socialLinks.linkedin,
-          twitter: social.twitter ?? member.socialLinks.twitter,
-        };
-      } catch (e) {}
-    }
+    if (email !== undefined) member.email = email;
+    if (mobileNumber !== undefined) member.mobileNumber = mobileNumber;
+    if (facebookId !== undefined) member.facebookId = facebookId;
+    if (batchType !== undefined) member.batchType = batchType;
 
     await member.save();
 

@@ -11,7 +11,7 @@ export async function getTeamMembers() {
             with: {
                 wing: true,
             },
-            orderBy: (members, { desc }) => [desc(members.createdAt)],
+            orderBy: (teamMembers, { desc }) => [desc(teamMembers.createdAt)],
         });
     } catch (error) {
         console.error("Database error fetching team members:", error);

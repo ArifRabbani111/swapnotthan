@@ -8,6 +8,7 @@ const connectDB = require('./config/db');
 const authRoutes = require('./routes/authRoutes');
 const eventRoutes = require('./routes/eventRoutes');
 const memberRoutes = require('./routes/memberRoutes');
+const coreValueRoutes = require('./routes/coreValueRoutes');
 const adminRoutes = require('./routes/adminRoutes');
 
 connectDB();
@@ -32,6 +33,7 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use('/api/auth', authRoutes);
 app.use('/api/events', eventRoutes);
 app.use('/api/members', memberRoutes);
+app.use('/api/core-values', coreValueRoutes);
 app.use('/api/admin', adminRoutes);
 
 app.use((err, req, res, next) => {

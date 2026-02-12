@@ -2,19 +2,31 @@ const fs = require('fs');
 const path = require('path');
 const { spawn } = require('child_process');
 
-const lockPath = path.join(__dirname, '..', '.next', 'dev', 'lock');
-try {
-  if (fs.existsSync(lockPath)) {
-    fs.unlinkSync(lockPath);
-    console.log('Removed stale .next/dev/lock');
+const rootDir = path.join(__dirname, '..');
+const lockPath = path.join(rootDir, '.next', 'dev', 'lock');
+
+function removeLock() {
+  try {
+    if (fs.existsSync(lockPath)) {
+      fs.unlinkSync(lockPath);
+      console.log('[dev:fresh] Removed stale .next/dev/lock');
+      return true;
+    }
+  } catch (e) {
+    console.warn('[dev:fresh] Could not remove lock:', e.message);
+    return false;
   }
-} catch (e) {
-  console.warn('Could not remove lock:', e.message);
+  return true;
 }
 
-const child = spawn('npx', ['next', 'dev'], {
-  cwd: path.join(__dirname, '..'),
-  stdio: 'inherit',
-  shell: true,
-});
-child.on('exit', (code) => process.exit(code || 0));
+// Remove lock (retry once after short delay if still held)
+removeLock();
+setTimeout(() => {
+  removeLock();
+  const child = spawn('npx', ['next', 'dev'], {
+    cwd: rootDir,
+    stdio: 'inherit',
+    shell: true,
+  });
+  child.on('exit', (code) => process.exit(code || 0));
+}, 300);

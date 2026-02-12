@@ -9,10 +9,15 @@ const {
 const { protect } = require('../middleware/authMiddleware');
 const upload = require('../middleware/uploadMiddleware');
 
-router.route('/').get(getEvents).post(protect, upload.single('image'), createEvent);
+const eventUpload = upload.fields([
+  { name: 'coverImage', maxCount: 1 },
+  { name: 'galleryImages', maxCount: 10 },
+]);
+
+router.route('/').get(getEvents).post(protect, eventUpload, createEvent);
 router
   .route('/:id')
-  .put(protect, upload.single('image'), updateEvent)
+  .put(protect, eventUpload, updateEvent)
   .delete(protect, deleteEvent);
 
 module.exports = router;

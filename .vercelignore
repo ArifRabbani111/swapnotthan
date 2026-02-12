@@ -1,0 +1,8 @@
+# Only ignore backend and tooling when building from repo root.
+# Do NOT ignore frontend/ — Vercel needs it (or set Root Directory to "frontend").
+backend
+.git
+*.log
+.cursor
+.vscode
+coverage

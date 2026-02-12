@@ -7,27 +7,29 @@ const memberSchema = new mongoose.Schema(
       required: [true, 'Member name is required'],
       trim: true,
     },
-    designation: {
-      type: String,
-      default: '',
-    },
     photo: {
       type: String,
       default: '',
     },
-    bio: {
+    email: {
       type: String,
       default: '',
-    },
-    committeeYear: {
-      type: String,
-      required: [true, 'Committee year is required'],
       trim: true,
     },
-    socialLinks: {
-      facebook: { type: String, default: '' },
-      linkedin: { type: String, default: '' },
-      twitter: { type: String, default: '' },
+    mobileNumber: {
+      type: String,
+      default: '',
+      trim: true,
+    },
+    facebookId: {
+      type: String,
+      default: '',
+      trim: true,
+    },
+    batchType: {
+      type: String,
+      enum: ['current', 'new'],
+      default: 'current',
     },
   },
   { timestamps: true }

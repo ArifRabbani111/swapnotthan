@@ -7,7 +7,7 @@ export function Footer() {
         <footer className="bg-primary text-primary-foreground pt-16 pb-8">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
-                    {/* Logo & Description */}
+                    {/* Logo & Tagline */}
                     <div className="space-y-6">
                         <div className="bg-white p-2 rounded-lg inline-block">
                             <Image
@@ -20,60 +20,77 @@ export function Footer() {
                         </div>
                         <h2 className="text-3xl font-bold italic">Swapnotthan</h2>
                         <p className="text-sm opacity-90 leading-relaxed">
-                            Swapnotthan is a non-profit organization dedicated to empowering communities and providing support to those in need. Join us in making a difference.
+                            Empowering Communities through Action. Join us in making a difference.
                         </p>
-                        <div className="flex space-x-4">
-                            <Link href="#" className="hover:opacity-75 transition-opacity"><Facebook size={20} /></Link>
-                            <Link href="#" className="hover:opacity-75 transition-opacity"><Twitter size={20} /></Link>
-                            <Link href="#" className="hover:opacity-75 transition-opacity"><Youtube size={20} /></Link>
-                            <Link href="#" className="hover:opacity-75 transition-opacity"><Instagram size={20} /></Link>
-                            <Link href="#" className="hover:opacity-75 transition-opacity"><Linkedin size={20} /></Link>
-                        </div>
                     </div>
 
-                    {/* Resources */}
+                    {/* Quick Links */}
                     <div>
-                        <h3 className="text-lg font-bold mb-6 underline decoration-accent underline-offset-8">Resources</h3>
+                        <h3 className="text-lg font-bold mb-6 underline decoration-accent underline-offset-8">Quick Links</h3>
                         <ul className="space-y-4 text-sm opacity-90">
+                            <li><Link href="/" className="hover:translate-x-1 transition-transform inline-block">Home</Link></li>
+                            <li><Link href="/about" className="hover:translate-x-1 transition-transform inline-block">About Us</Link></li>
                             <li><Link href="/events" className="hover:translate-x-1 transition-transform inline-block">Events</Link></li>
                             <li><Link href="/members" className="hover:translate-x-1 transition-transform inline-block">Members</Link></li>
                             <li><Link href="/news" className="hover:translate-x-1 transition-transform inline-block">Latest News</Link></li>
                             <li><Link href="/gallery" className="hover:translate-x-1 transition-transform inline-block">Gallery</Link></li>
-                        </ul>
-                    </div>
-
-                    {/* Company */}
-                    <div>
-                        <h3 className="text-lg font-bold mb-6 underline decoration-accent underline-offset-8">Company</h3>
-                        <ul className="space-y-4 text-sm opacity-90">
-                            <li><Link href="/about" className="hover:translate-x-1 transition-transform inline-block">About Us</Link></li>
-                            <li><Link href="/contact" className="hover:translate-x-1 transition-transform inline-block">Contact Us</Link></li>
-                            <li><Link href="/login" className="hover:translate-x-1 transition-transform inline-block">Admin Login</Link></li>
+                            <li><Link href="/volunteer" className="hover:translate-x-1 transition-transform inline-block">Volunteer</Link></li>
+                            <li><Link href="/contact" className="hover:translate-x-1 transition-transform inline-block">Contact</Link></li>
                             <li><Link href="/terms" className="hover:translate-x-1 transition-transform inline-block">Terms of Service</Link></li>
+                            <li><Link href="/login" className="hover:translate-x-1 transition-transform inline-block">Admin Login</Link></li>
                         </ul>
                     </div>
 
-                    {/* Contact Info */}
+                    {/* Customer Support */}
                     <div>
-                        <h3 className="text-lg font-bold mb-6 underline decoration-accent underline-offset-8">Get in Touch</h3>
+                        <h3 className="text-lg font-bold mb-6 underline decoration-accent underline-offset-8">Customer Support</h3>
                         <ul className="space-y-4 text-sm opacity-90">
                             <li className="flex items-center gap-3">
-                                <MapPin size={18} className="text-accent" />
+                                <Phone size={18} className="text-accent shrink-0" />
+                                <a href="tel:+8801647431836" className="hover:underline font-medium">+88 01647431836</a>
+                            </li>
+                            <li className="flex items-center gap-3">
+                                <Mail size={18} className="text-accent shrink-0" />
+                                <a href="mailto:info@swapnotthan.org" className="hover:underline">info@swapnotthan.org</a>
+                            </li>
+                            <li className="flex items-center gap-3">
+                                <MapPin size={18} className="text-accent shrink-0" />
                                 <span>Dhaka, Bangladesh</span>
                             </li>
-                            <li className="flex items-center gap-3">
-                                <Phone size={18} className="text-accent" />
-                                <span>+880 1234 567890</span>
-                            </li>
-                            <li className="flex items-center gap-3">
-                                <Mail size={18} className="text-accent" />
-                                <span>info@swapnotthan.org</span>
-                            </li>
                         </ul>
+                    </div>
+
+                    {/* Social Media Icons */}
+                    <div>
+                        <h3 className="text-lg font-bold mb-6 underline decoration-accent underline-offset-8">Follow Us</h3>
+                        <div className="flex flex-wrap gap-4">
+                            <Link href="#" className="hover:opacity-75 transition-opacity" aria-label="Facebook">
+                                <Facebook size={24} />
+                            </Link>
+                            <Link href="#" className="hover:opacity-75 transition-opacity" aria-label="Twitter">
+                                <Twitter size={24} />
+                            </Link>
+                            <Link href="#" className="hover:opacity-75 transition-opacity" aria-label="YouTube">
+                                <Youtube size={24} />
+                            </Link>
+                            <Link href="#" className="hover:opacity-75 transition-opacity" aria-label="Instagram">
+                                <Instagram size={24} />
+                            </Link>
+                            <Link href="#" className="hover:opacity-75 transition-opacity" aria-label="LinkedIn">
+                                <Linkedin size={24} />
+                            </Link>
+                        </div>
                     </div>
                 </div>
 
-                <div className="border-t border-primary-foreground/20 pt-8 text-center text-xs opacity-70">
+                {/* Tech Partner Credit */}
+                <div className="border-t border-primary-foreground/20 pt-6 pb-4">
+                    <p className="text-center text-sm font-medium text-accent">
+                        Tech Partner: <span className="font-bold">Chilekotha</span>
+                    </p>
+                </div>
+
+                <div className="border-t border-primary-foreground/20 pt-4 text-center text-xs opacity-70">
                     <p>© {new Date().getFullYear()} Swapnotthan Foundation. All rights reserved.</p>
                 </div>
             </div>
