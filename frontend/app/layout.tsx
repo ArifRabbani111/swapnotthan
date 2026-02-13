@@ -32,6 +32,23 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col`}
       >
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+(function() {
+  window.addEventListener('unhandledrejection', function(event) {
+    var reason = event.reason;
+    var isEventLike = reason instanceof Event ||
+      (typeof reason === 'object' && reason !== null && !(reason instanceof Error) && (String(reason) === '[object Event]' || (reason.constructor && reason.constructor.name === 'Event')));
+    if (isEventLike) {
+      event.preventDefault();
+      event.stopImmediatePropagation();
+    }
+  }, true);
+})();
+            `.trim(),
+          }}
+        />
         <SessionProvider>
           <QueryProvider>
             <Navbar />

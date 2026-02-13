@@ -5,9 +5,12 @@ import * as schema from "./schema";
 const connectionString = process.env.DATABASE_URL;
 
 if (!connectionString && process.env.NODE_ENV !== "test") {
-    console.warn(
-        "[swapnotthan] DATABASE_URL is not set. Add it to frontend/.env.local — e.g. DATABASE_URL=postgresql://user:pass@localhost:5432/swapnotthan"
-    );
+    if (typeof globalThis !== "undefined" && !(globalThis as { __swapnotthanDbWarned?: boolean }).__swapnotthanDbWarned) {
+        (globalThis as { __swapnotthanDbWarned?: boolean }).__swapnotthanDbWarned = true;
+        console.warn(
+            "[swapnotthan] DATABASE_URL is not set. Add it to frontend/.env.local — e.g. DATABASE_URL=postgresql://user:pass@localhost:5432/swapnotthan"
+        );
+    }
 }
 
 const pool = new Pool({

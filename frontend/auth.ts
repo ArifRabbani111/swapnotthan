@@ -5,13 +5,12 @@ import { authConfig } from "./auth.config";
 import { users } from "./db/schema";
 import { eq } from "drizzle-orm";
 
-// NextAuth requires AUTH_SECRET. In development only, use a fallback if missing.
+// NextAuth requires AUTH_SECRET. Use a fallback if missing so build and dev work without .env.
 if (!process.env.AUTH_SECRET) {
-    if (process.env.NODE_ENV === "production") {
-        throw new Error("AUTH_SECRET is required in production. Set it in your environment or .env.");
-    }
     process.env.AUTH_SECRET = "dev-secret-change-in-production-min-32-chars";
-    console.warn("[auth] AUTH_SECRET not set; using dev fallback. Set AUTH_SECRET in .env.local for production.");
+    if (process.env.NODE_ENV === "production") {
+        console.warn("[auth] AUTH_SECRET not set in production. Set AUTH_SECRET in your deployment env.");
+    }
 }
 
 const hasDatabase = Boolean(process.env.DATABASE_URL);

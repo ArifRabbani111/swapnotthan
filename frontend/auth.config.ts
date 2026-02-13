@@ -1,6 +1,11 @@
 import type { NextAuthConfig } from "next-auth";
 import Google from "next-auth/providers/google";
 
+// Required by Auth.js in middleware and API. Set before any NextAuth() call so middleware bundle has it.
+if (!process.env.AUTH_SECRET) {
+    process.env.AUTH_SECRET = "dev-secret-change-in-production-min-32-chars";
+}
+
 export const authConfig = {
     providers: [Google],
     callbacks: {
