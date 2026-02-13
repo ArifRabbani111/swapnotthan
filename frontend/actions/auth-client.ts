@@ -1,7 +1,12 @@
-"use client"; // Note: This will be imported in client components, but the 'sign' functions are server-side in NextAuth v5? 
-// Actually, it's better to use 'use server' in a separate file for the actual logic if needed, but NextAuth handlers work too.
+"use client";
 
-import { signIn, signOut } from "next-auth/react";
+import { signOut } from "firebase/auth";
+import { auth } from "@/lib/firebase";
+import { useRouter } from "next/navigation";
 
-export const loginWithGoogle = () => signIn("google", { callbackUrl: "/dashboard" });
-export const logout = () => signOut({ callbackUrl: "/" });
+export async function logout() {
+    if (auth) {
+        await signOut(auth);
+    }
+    window.location.href = "/";
+}

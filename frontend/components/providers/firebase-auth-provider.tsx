@@ -38,13 +38,16 @@ export function FirebaseAuthProvider({ children }: { children: ReactNode }) {
         return () => unsubscribe();
     }, []);
 
-    // Redirect to /login if on dashboard and not logged in (Firebase)
+    // Redirect: dashboard without user -> login; login with user -> dashboard
     useEffect(() => {
         if (loading) return;
-        if (!auth) return; // Firebase not configured; skip redirect
+        if (!auth) return;
         const isDashboard = pathname?.startsWith("/dashboard");
+        const isLogin = pathname === "/login";
         if (isDashboard && !user) {
             router.replace("/login");
+        } else if (isLogin && user) {
+            router.replace("/dashboard");
         }
     }, [loading, user, pathname, router]);
 
