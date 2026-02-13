@@ -23,7 +23,8 @@ function removeLock() {
 removeLock();
 setTimeout(() => {
   removeLock();
-  const child = spawn('npx', ['next', 'dev'], {
+  const nextBin = path.join(rootDir, 'node_modules', 'next', 'dist', 'bin', 'next');
+  const child = spawn('node', [nextBin, 'dev'], {
     cwd: rootDir,
     stdio: 'inherit',
     shell: true,

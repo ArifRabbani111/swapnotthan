@@ -6,13 +6,13 @@
     "node": ">=18 <=22"
   },
   "scripts": {
-    "dev": "next dev",
-    "dev:turbo": "next dev",
+    "dev": "node ./node_modules/next/dist/bin/next dev",
+    "dev:turbo": "node ./node_modules/next/dist/bin/next dev",
     "dev:fresh": "node scripts/dev-fresh.js",
     "dev:unlock": "node scripts/dev-unlock.js",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint",
+    "build": "node ./node_modules/next/dist/bin/next build",
+    "start": "node ./node_modules/next/dist/bin/next start",
+    "lint": "node ./node_modules/next/dist/bin/next lint",
     "make-admin": "tsx make-admin.ts",
     "db:generate": "drizzle-kit generate",
     "db:push": "drizzle-kit push"

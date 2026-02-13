@@ -1,5 +1,22 @@
 # Run the frontend
 
+## "Cannot find module '../server/require-hook'" or similar Next.js errors
+
+Next.js 15 works best with **Node.js 18, 20, or 22**. If you're on **Node 24**, switch to Node 20 LTS:
+
+- **With nvm:** `nvm install 20` then `nvm use 20`
+- **Without nvm:** Install Node 20 LTS from [nodejs.org](https://nodejs.org/)
+
+Then from the `frontend` folder:
+
+```bash
+Remove-Item -Recurse -Force node_modules, .next -ErrorAction SilentlyContinue
+npm install
+npm run dev
+```
+
+---
+
 ## Quick fix: Connection Failed / ERR_CONNECTION_RESET
 
 If the browser shows **Connection Failed** on localhost:3000 or 3002:

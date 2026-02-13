@@ -5,16 +5,16 @@ import { siteSettings } from "@/db/schema";
 import { eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 
-export async function getSiteSettings() {
-    try {
-        const settings = await db.query.siteSettings.findFirst({
-            where: eq(siteSettings.id, "hero"),
-        });
-        return settings;
-    } catch (error) {
-        console.error("Database error fetching site settings:", error);
-        return null;
-    }
+export async function getSiteSettings(): Promise<{ id: string; heroBackgroundImageUrl: string | null; updatedAt: Date } | null> {
+    if (!process.env.DATABASE_URL) return null;
+    return Promise.resolve()
+        .then(async () => {
+            const settings = await db.query.siteSettings.findFirst({
+                where: eq(siteSettings.id, "hero"),
+            });
+            return settings ?? null;
+        })
+        .catch(() => null);
 }
 
 export async function updateHeroBackground(imageUrl: string) {

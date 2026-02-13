@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Facebook, Twitter, Youtube, Instagram, Linkedin, Mail, Phone, MapPin } from "lucide-react";
+import { Facebook, Twitter, Youtube, Instagram, Linkedin, Mail, MapPin } from "lucide-react";
 
 export function Footer() {
     return (
@@ -37,7 +37,6 @@ export function Footer() {
                             <li><Link href="/volunteer" className="hover:translate-x-1 transition-transform inline-block">Volunteer</Link></li>
                             <li><Link href="/contact" className="hover:translate-x-1 transition-transform inline-block">Contact</Link></li>
                             <li><Link href="/terms" className="hover:translate-x-1 transition-transform inline-block">Terms of Service</Link></li>
-                            <li><Link href="/login" className="hover:translate-x-1 transition-transform inline-block">Admin Login</Link></li>
                         </ul>
                     </div>
 
@@ -45,10 +44,6 @@ export function Footer() {
                     <div>
                         <h3 className="text-lg font-bold mb-6 underline decoration-accent underline-offset-8">Customer Support</h3>
                         <ul className="space-y-4 text-sm opacity-90">
-                            <li className="flex items-center gap-3">
-                                <Phone size={18} className="text-accent shrink-0" />
-                                <a href="tel:+8801647431836" className="hover:underline font-medium">+88 01647431836</a>
-                            </li>
                             <li className="flex items-center gap-3">
                                 <Mail size={18} className="text-accent shrink-0" />
                                 <a href="mailto:info@swapnotthan.org" className="hover:underline">info@swapnotthan.org</a>
@@ -85,9 +80,24 @@ export function Footer() {
 
                 {/* Tech Partner Credit */}
                 <div className="border-t border-primary-foreground/20 pt-6 pb-4">
-                    <p className="text-center text-sm font-medium text-accent">
-                        Tech Partner: <span className="font-bold">Chilekotha</span>
-                    </p>
+                    <div className="flex flex-col items-center justify-center gap-2">
+                        <p className="text-sm font-medium text-accent">Tech Partner</p>
+                        <a
+                            href="https://chilekotha.top"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-2 font-bold hover:underline focus:outline-none focus:ring-2 focus:ring-accent rounded"
+                        >
+                            <Image
+                                src="/chilekotha%20logo.jpeg"
+                                alt="Chilekotha"
+                                width={48}
+                                height={48}
+                                className="object-contain rounded"
+                            />
+                            <span>Chilekotha</span>
+                        </a>
+                    </div>
                 </div>
 
                 <div className="border-t border-primary-foreground/20 pt-4 text-center text-xs opacity-70">

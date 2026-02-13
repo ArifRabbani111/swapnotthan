@@ -9,11 +9,14 @@ export default async function Home() {
   let events: Awaited<ReturnType<typeof getEvents>> = [];
   let settings: Awaited<ReturnType<typeof getSiteSettings>> = null;
   try {
-    const [e, s] = await Promise.all([getEvents(), getSiteSettings()]);
+    const [e, s] = await Promise.all([
+      getEvents().catch(() => []),
+      getSiteSettings().catch(() => null),
+    ]);
     events = e;
     settings = s;
-  } catch (err) {
-    console.error("Home page data fetch error:", err);
+  } catch {
+    // use defaults already set above
   }
 
   return (

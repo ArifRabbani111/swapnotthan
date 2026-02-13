@@ -6,12 +6,12 @@ import { eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 
 export async function getEvents() {
+    if (!process.env.DATABASE_URL) return [];
     try {
         return await db.query.events.findMany({
             orderBy: (events, { desc }) => [desc(events.createdAt)],
         });
-    } catch (error) {
-        console.error("Database error fetching events:", error);
+    } catch {
         return [];
     }
 }

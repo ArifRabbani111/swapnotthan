@@ -30,7 +30,7 @@ export default function AboutPage() {
                     <div className="relative">
                         <div className="aspect-square bg-primary/10 rounded-3xl overflow-hidden shadow-2xl relative">
                             <Image
-                                src="https://images.unsplash.com/photo-1593113598332-cd288d6444f1?q=80&w=800"
+                                src="/swapno%20about.jpeg"
                                 alt="About Swapnotthan"
                                 fill
                                 className="object-cover"
