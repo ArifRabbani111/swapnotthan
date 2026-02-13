@@ -11,7 +11,7 @@ export async function getNewsItems() {
             orderBy: (news, { desc }) => [desc(news.createdAt)],
         });
     } catch (error) {
-        console.error("Database error fetching news items:", error);
+        if (process.env.DATABASE_URL) console.error("Database error fetching news items:", error);
         return [];
     }
 }

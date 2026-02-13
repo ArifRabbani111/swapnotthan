@@ -25,7 +25,7 @@ export async function getDashboardStats() {
             { name: "Active Wings", value: wingsCount[0].value.toString(), icon: "layers", color: "text-purple-600" },
         ];
     } catch (error) {
-        console.error("Database error fetching dashboard stats:", error);
+        if (process.env.DATABASE_URL) console.error("Database error fetching dashboard stats:", error);
         return [
             { name: "Total Events", value: "0", icon: "calendar", color: "text-blue-600" },
             { name: "Active Members", value: "0", icon: "users", color: "text-green-600" },

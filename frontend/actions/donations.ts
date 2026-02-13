@@ -14,7 +14,7 @@ export async function getDonations() {
             orderBy: (donations, { desc }) => [desc(donations.createdAt)],
         });
     } catch (error) {
-        console.error("Database error fetching donations:", error);
+        if (process.env.DATABASE_URL) console.error("Database error fetching donations:", error);
         return [];
     }
 }

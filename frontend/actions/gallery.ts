@@ -11,7 +11,7 @@ export async function getGalleryItems() {
             orderBy: (gallery, { desc }) => [desc(gallery.createdAt)],
         });
     } catch (error) {
-        console.error("Database error fetching gallery items:", error);
+        if (process.env.DATABASE_URL) console.error("Database error fetching gallery items:", error);
         return [];
     }
 }

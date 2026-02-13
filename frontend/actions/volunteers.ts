@@ -25,7 +25,7 @@ export async function getVolunteers() {
             orderBy: (volunteers, { desc }) => [desc(volunteers.createdAt)],
         });
     } catch (error) {
-        console.error("Database error fetching volunteers:", error);
+        if (process.env.DATABASE_URL) console.error("Database error fetching volunteers:", error);
         return [];
     }
 }

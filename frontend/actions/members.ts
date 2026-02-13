@@ -14,7 +14,7 @@ export async function getTeamMembers() {
             orderBy: (teamMembers, { desc }) => [desc(teamMembers.createdAt)],
         });
     } catch (error) {
-        console.error("Database error fetching team members:", error);
+        if (process.env.DATABASE_URL) console.error("Database error fetching team members:", error);
         return [];
     }
 }

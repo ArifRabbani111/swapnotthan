@@ -11,7 +11,7 @@ export async function getWings() {
             orderBy: (wings, { desc }) => [desc(wings.createdAt)],
         });
     } catch (error) {
-        console.error("Database error fetching wings:", error);
+        if (process.env.DATABASE_URL) console.error("Database error fetching wings:", error);
         return [];
     }
 }

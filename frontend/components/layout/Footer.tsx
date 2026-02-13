@@ -87,7 +87,8 @@ export function Footer() {
                         href="https://chilekotha.top"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="mx-auto flex max-w-xs items-center justify-center gap-4 rounded-xl border-2 border-primary-foreground/20 bg-primary-foreground/5 px-6 py-4 transition-all hover:border-accent hover:bg-primary-foreground/10 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-primary"
+                        title="Visit Chilekotha at chilekotha.top"
+                        className="mx-auto flex max-w-xs cursor-pointer items-center justify-center gap-4 rounded-xl border-2 border-primary-foreground/20 bg-primary-foreground/5 px-6 py-4 transition-all hover:border-accent hover:bg-primary-foreground/10 hover:underline focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-primary"
                     >
                         <Image
                             src="/chilekotha%20logo.jpeg"
@@ -100,7 +101,9 @@ export function Footer() {
                             <span className="block text-lg font-extrabold tracking-tight text-primary-foreground">
                                 Chilekotha
                             </span>
-                            <span className="text-xs font-medium text-primary-foreground/80">chilekotha.top</span>
+                            <span className="block text-xs font-medium text-primary-foreground/80">
+                                chilekotha.top — click to visit
+                            </span>
                         </div>
                     </a>
                 </div>
