@@ -79,25 +79,30 @@ export function Footer() {
                 </div>
 
                 {/* Tech Partner Credit */}
-                <div className="border-t border-primary-foreground/20 pt-6 pb-4">
-                    <div className="flex flex-col items-center justify-center gap-2">
-                        <p className="text-sm font-medium text-accent">Tech Partner</p>
-                        <a
-                            href="https://chilekotha.top"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex items-center gap-2 font-bold hover:underline focus:outline-none focus:ring-2 focus:ring-accent rounded"
-                        >
-                            <Image
-                                src="/chilekotha%20logo.jpeg"
-                                alt="Chilekotha"
-                                width={48}
-                                height={48}
-                                className="object-contain rounded"
-                            />
-                            <span>Chilekotha</span>
-                        </a>
-                    </div>
+                <div className="border-t border-primary-foreground/25 pt-8 pb-6">
+                    <p className="text-center text-xs font-semibold uppercase tracking-widest text-primary-foreground/70 mb-4">
+                        Technology Partner
+                    </p>
+                    <a
+                        href="https://chilekotha.top"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="mx-auto flex max-w-xs items-center justify-center gap-4 rounded-xl border-2 border-primary-foreground/20 bg-primary-foreground/5 px-6 py-4 transition-all hover:border-accent hover:bg-primary-foreground/10 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-primary"
+                    >
+                        <Image
+                            src="/chilekotha%20logo.jpeg"
+                            alt="Chilekotha"
+                            width={56}
+                            height={56}
+                            className="object-contain rounded-lg"
+                        />
+                        <div className="text-left">
+                            <span className="block text-lg font-extrabold tracking-tight text-primary-foreground">
+                                Chilekotha
+                            </span>
+                            <span className="text-xs font-medium text-primary-foreground/80">chilekotha.top</span>
+                        </div>
+                    </a>
                 </div>
 
                 <div className="border-t border-primary-foreground/20 pt-4 text-center text-xs opacity-70">
