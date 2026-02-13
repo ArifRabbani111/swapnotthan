@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import QueryProvider from "@/components/providers/query-provider";
 import { SessionProvider } from "@/components/providers/session-provider";
+import { FirebaseAuthProvider } from "@/components/providers/firebase-auth-provider";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Toaster } from "@/components/ui/sonner";
@@ -50,6 +51,7 @@ export default function RootLayout({
           }}
         />
         <SessionProvider>
+          <FirebaseAuthProvider>
           <QueryProvider>
             <Navbar />
             <main className="flex-grow">
@@ -58,6 +60,7 @@ export default function RootLayout({
             <Footer />
             <Toaster position="top-center" richColors />
           </QueryProvider>
+          </FirebaseAuthProvider>
         </SessionProvider>
       </body>
     </html>
