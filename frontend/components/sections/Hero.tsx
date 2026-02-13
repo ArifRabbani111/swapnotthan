@@ -27,7 +27,7 @@ export function Hero({ backgroundImage }: { backgroundImage?: string | null }) {
 
             <div className="container relative z-10 px-4 text-center space-y-6">
                 <h1 className="text-4xl md:text-7xl font-bold tracking-tight text-white drop-shadow-lg">
-                    Empowering Communities <br /> through <span className="italic text-accent">Action</span>
+                    Let&apos;s begin with <span className="italic text-accent">volunteers</span>
                 </h1>
                 <p className="max-w-[700px] mx-auto text-lg md:text-xl text-white/90 drop-shadow-md">
                     Join Swapnotthan foundation in our mission to bring positive change and support to those who need it most.

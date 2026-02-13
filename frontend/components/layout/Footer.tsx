@@ -20,7 +20,7 @@ export function Footer() {
                         </div>
                         <h2 className="text-3xl font-bold italic">Swapnotthan</h2>
                         <p className="text-sm opacity-90 leading-relaxed">
-                            Empowering Communities through Action. Join us in making a difference.
+                            Let&apos;s begin with volunteers. Join us in making a difference.
                         </p>
                     </div>
 

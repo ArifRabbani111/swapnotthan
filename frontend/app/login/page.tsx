@@ -9,6 +9,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { auth } from "@/lib/firebase";
+import { useFirebaseAuth } from "@/components/providers/firebase-auth-provider";
 import {
     signInWithEmailAndPassword,
     signInWithPopup,
@@ -20,6 +21,7 @@ import { toast } from "sonner";
 
 export default function LoginPage() {
     const router = useRouter();
+    const { user, loading: authLoading } = useFirebaseAuth();
     const [isLoading, setIsLoading] = useState(false);
     const [isSignUp, setIsSignUp] = useState(false);
     const [email, setEmail] = useState("");
@@ -47,8 +49,19 @@ export default function LoginPage() {
             router.push("/dashboard");
             router.refresh();
         } catch (err: unknown) {
-            const message = err instanceof Error ? err.message : "Login failed";
-            toast.error(message);
+            const msg = err instanceof Error ? err.message : String(err);
+            const friendly = msg.includes("auth/invalid-credential") || msg.includes("auth/wrong-password")
+                ? "Wrong email or password."
+                : msg.includes("auth/user-not-found")
+                    ? "No account with this email. Create one or use Google."
+                    : msg.includes("auth/email-already-in-use")
+                        ? "This email is already registered. Sign in instead."
+                        : msg.includes("auth/weak-password")
+                            ? "Password must be at least 6 characters."
+                            : msg.includes("auth/invalid-email")
+                                ? "Please enter a valid email."
+                                : msg;
+            toast.error(friendly);
         } finally {
             setIsLoading(false);
         }
@@ -67,12 +80,21 @@ export default function LoginPage() {
             router.push("/dashboard");
             router.refresh();
         } catch (err: unknown) {
-            const message = err instanceof Error ? err.message : "Google sign-in failed";
-            toast.error(message);
+            const msg = err instanceof Error ? err.message : String(err);
+            const friendly = msg.includes("auth/popup-closed") ? "Sign-in was cancelled." : msg.includes("auth/popup-blocked") ? "Allow popups for this site." : msg;
+            toast.error(friendly);
         } finally {
             setIsLoading(false);
         }
     };
+
+    if (authLoading) {
+        return (
+            <div className="min-h-screen flex items-center justify-center bg-muted/30">
+                <Loader2 className="h-8 w-8 animate-spin text-primary" />
+            </div>
+        );
+    }
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-muted/30 px-4">

@@ -1,6 +1,10 @@
 # Firebase login setup (admin panel)
 
-The admin panel uses **Firebase Authentication** for login. Follow these steps to enable it.
+The admin panel uses **Firebase Authentication** for login.
+
+**Project:** Swanpnottan (ID: `swanpnottan`, Project #: 499847191619)  
+**Support email:** esoftware30@gmail.com  
+Config is loaded from `frontend/.env.local` (NEXT_PUBLIC_FIREBASE_*). Do not commit real keys to git.
 
 ---
 
