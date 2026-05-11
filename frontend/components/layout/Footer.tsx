@@ -13,13 +13,13 @@ export function Footer() {
                             <Image
                                 src="/logo.png"
                                 alt="Swapnotthan Logo"
-                                width={80}
-                                height={80}
+                                width={60}
+                                height={60}
                                 className="object-contain"
                             />
                         </div>
                         <div>
-                            <h2 className="text-3xl font-bold italic leading-tight">Swapnotthan</h2>
+                            <h2 className="text-3xl font-bold italic leading-none">Swapnotthan</h2>
                             <p className="text-sm opacity-90 leading-tight">
                                 Let&apos;s Begin with Volunteers.
                             </p>
@@ -50,15 +50,15 @@ export function Footer() {
                             </li>
                             <li className="flex items-center gap-3">
                                 <MapPin size={18} className="text-accent shrink-0" />
-                                <span className="break-words">Shahjalal University of Science and Technology (SUST), Sylhet, Bangladesh.</span>
+                                <span className="break-words">SUST, Sylhet, Bangladesh</span>
                             </li>
                         </ul>
                     </div>
                 </div>
 
                 {/* Tech Partner Credit */}
-                <div className="border-t border-primary-foreground/25 pt-8 pb-6">
-                    <p className="text-center text-xs font-semibold uppercase tracking-widest text-primary-foreground/70 mb-4">
+                <div className="border-t border-primary-foreground/25 pt-6 pb-4">
+                    <p className="text-center text-xs font-semibold uppercase tracking-widest text-primary-foreground/70 mb-3">
                         Technology Partner
                     </p>
                     <a
@@ -66,21 +66,21 @@ export function Footer() {
                         target="_blank"
                         rel="noopener noreferrer"
                         title="Visit Chilekotha at chilekotha.top"
-                        className="mx-auto flex max-w-xs cursor-pointer items-center justify-center gap-4 rounded-xl border-2 border-primary-foreground/20 bg-primary-foreground/5 px-6 py-4 transition-all hover:border-accent hover:bg-primary-foreground/10 hover:underline focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-primary"
+                        className="mx-auto flex max-w-xs cursor-pointer items-center justify-center gap-3 rounded-lg border border-primary-foreground/20 bg-primary-foreground/5 px-4 py-2.5 transition-all hover:border-accent hover:bg-primary-foreground/10 hover:underline focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-primary"
                     >
                         <Image
                             src="/chilekotha%20logo.jpeg"
                             alt="Chilekotha"
-                            width={56}
-                            height={56}
+                            width={40}
+                            height={40}
                             className="object-contain rounded-lg"
                         />
                         <div className="text-left">
-                            <span className="block text-lg font-extrabold tracking-tight text-primary-foreground">
+                            <span className="block text-sm font-bold tracking-tight text-primary-foreground">
                                 Chilekotha
                             </span>
-                            <span className="block text-xs font-medium text-primary-foreground/80">
-                                chilekotha.top — click to visit
+                            <span className="block text-xs font-medium text-primary-foreground/70">
+                                chilekotha.top
                             </span>
                         </div>
                     </a>
