@@ -1,14 +1,14 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Facebook, Twitter, Youtube, Instagram, Linkedin, Mail, MapPin } from "lucide-react";
+import { Mail, MapPin } from "lucide-react";
 
 export function Footer() {
     return (
         <footer className="bg-primary text-primary-foreground pt-16 pb-8">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12 mb-12">
                     {/* Logo & Tagline */}
-                    <div className="space-y-6">
+                    <div className="space-y-4">
                         <div className="bg-white p-2 rounded-lg inline-block">
                             <Image
                                 src="/logo.png"
@@ -18,10 +18,12 @@ export function Footer() {
                                 className="object-contain"
                             />
                         </div>
-                        <h2 className="text-3xl font-bold italic">Swapnotthan</h2>
-                        <p className="text-sm opacity-90 leading-relaxed">
-                            Let&apos;s begin with volunteers. Join us in making a difference.
-                        </p>
+                        <div>
+                            <h2 className="text-3xl font-bold italic leading-tight">Swapnotthan</h2>
+                            <p className="text-sm opacity-90 leading-tight">
+                                Let&apos;s Begin with Volunteers.
+                            </p>
+                        </div>
                     </div>
 
                     {/* Quick Links */}
@@ -32,49 +34,25 @@ export function Footer() {
                             <li><Link href="/about" className="hover:translate-x-1 transition-transform inline-block">About Us</Link></li>
                             <li><Link href="/events" className="hover:translate-x-1 transition-transform inline-block">Events</Link></li>
                             <li><Link href="/members" className="hover:translate-x-1 transition-transform inline-block">Members</Link></li>
-                            <li><Link href="/news" className="hover:translate-x-1 transition-transform inline-block">Latest News</Link></li>
                             <li><Link href="/gallery" className="hover:translate-x-1 transition-transform inline-block">Gallery</Link></li>
                             <li><Link href="/volunteer" className="hover:translate-x-1 transition-transform inline-block">Volunteer</Link></li>
                             <li><Link href="/contact" className="hover:translate-x-1 transition-transform inline-block">Contact</Link></li>
-                            <li><Link href="/terms" className="hover:translate-x-1 transition-transform inline-block">Terms of Service</Link></li>
                         </ul>
                     </div>
 
-                    {/* Customer Support */}
+                    {/* Contact */}
                     <div>
-                        <h3 className="text-lg font-bold mb-6 underline decoration-accent underline-offset-8">Customer Support</h3>
+                        <h3 className="text-lg font-bold mb-6 underline decoration-accent underline-offset-8">Contact</h3>
                         <ul className="space-y-4 text-sm opacity-90">
                             <li className="flex items-center gap-3">
                                 <Mail size={18} className="text-accent shrink-0" />
-                                <a href="mailto:info@swapnotthan.org" className="hover:underline">info@swapnotthan.org</a>
+                                <a href="mailto:swapnotthan@sust.edu" className="hover:underline">swapnotthan@sust.edu</a>
                             </li>
                             <li className="flex items-center gap-3">
                                 <MapPin size={18} className="text-accent shrink-0" />
-                                <span>Dhaka, Bangladesh</span>
+                                <span className="break-words">Shahjalal University of Science and Technology (SUST), Sylhet, Bangladesh.</span>
                             </li>
                         </ul>
-                    </div>
-
-                    {/* Social Media Icons */}
-                    <div>
-                        <h3 className="text-lg font-bold mb-6 underline decoration-accent underline-offset-8">Follow Us</h3>
-                        <div className="flex flex-wrap gap-4">
-                            <Link href="#" className="hover:opacity-75 transition-opacity" aria-label="Facebook">
-                                <Facebook size={24} />
-                            </Link>
-                            <Link href="#" className="hover:opacity-75 transition-opacity" aria-label="Twitter">
-                                <Twitter size={24} />
-                            </Link>
-                            <Link href="#" className="hover:opacity-75 transition-opacity" aria-label="YouTube">
-                                <Youtube size={24} />
-                            </Link>
-                            <Link href="#" className="hover:opacity-75 transition-opacity" aria-label="Instagram">
-                                <Instagram size={24} />
-                            </Link>
-                            <Link href="#" className="hover:opacity-75 transition-opacity" aria-label="LinkedIn">
-                                <Linkedin size={24} />
-                            </Link>
-                        </div>
                     </div>
                 </div>
 
@@ -109,7 +87,7 @@ export function Footer() {
                 </div>
 
                 <div className="border-t border-primary-foreground/20 pt-4 text-center text-xs opacity-70">
-                    <p>© {new Date().getFullYear()} Swapnotthan Foundation. All rights reserved.</p>
+                    <p>2026 Swapnotthan</p>
                 </div>
             </div>
         </footer>

@@ -14,7 +14,7 @@ export default function TermsPage() {
                 <div className="container mx-auto px-4 max-w-3xl prose prose-neutral dark:prose-invert">
                     <h2>1. Acceptance of Terms</h2>
                     <p>
-                        By accessing and using the Swapnotthan Foundation website and services, you accept and agree to be bound by these Terms of Service. If you do not agree, please do not use our services.
+                        By accessing and using the Swapnotthan website and services, you accept and agree to be bound by these Terms of Service. If you do not agree, please do not use our services.
                     </p>
 
                     <h2>2. Use of Services</h2>

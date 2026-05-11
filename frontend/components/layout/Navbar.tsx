@@ -16,10 +16,10 @@ const navLinks = [
 export function Navbar() {
     return (
         <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-            <div className="container mx-auto flex h-24 items-center justify-between px-4 sm:px-6 lg:px-8">
+            <div className="container mx-auto flex h-20 items-center justify-between gap-2 px-3 sm:px-6 lg:px-8">
                 <div className="flex items-center gap-2">
                     <Link href="/" className="flex items-center space-x-2">
-                        <div className="relative h-16 w-16 md:h-20 md:w-20">
+                        <div className="relative h-10 w-10 md:h-12 md:w-12">
                             <Image
                                 src="/logo.png"
                                 alt="Swapnotthan Logo"
@@ -45,10 +45,14 @@ export function Navbar() {
                 </nav>
 
                 <div className="flex items-center md:ml-8">
-                    <Button className="rounded-full bg-primary hover:bg-primary/90" asChild>
-                        <Link href="/contact">
-                            <Phone className="mr-2 h-4 w-4" />
-                            Contact
+                    <Button
+                        className="h-9 rounded-full bg-red-600 px-2.5 text-[11px] text-white hover:bg-red-700 sm:h-10 sm:px-4 sm:text-sm shadow-[0_0_18px_rgba(220,38,38,0.75)] animate-pulse whitespace-nowrap"
+                        asChild
+                    >
+                        <Link href="tel:01612007207" aria-label="Blood Hotline 01612007207">
+                            <Phone className="mr-1.5 h-3.5 w-3.5 sm:mr-2 sm:h-4 sm:w-4" />
+                            <span className="sm:hidden">01612007207</span>
+                            <span className="hidden sm:inline">Blood Hotline: 01612007207</span>
                         </Link>
                     </Button>
                 </div>

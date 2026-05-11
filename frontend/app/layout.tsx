@@ -20,7 +20,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Swapnotthan | Modernized Platform",
-  description: "A professional platform for Swapnotthan foundation.",
+  description: "A professional platform for Swapnotthan.",
 };
 
 export default function RootLayout({

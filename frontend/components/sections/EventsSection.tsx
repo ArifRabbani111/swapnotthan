@@ -18,14 +18,14 @@ interface EventsSectionProps {
 export function EventsSection({ events }: EventsSectionProps) {
     return (
         <section className="py-24 bg-background">
-            <div className="container mx-auto px-4 text-center mb-16 space-y-4">
+            <div className="container mx-auto px-4 text-center mb-16 space-y-4 max-w-5xl">
                 <h2 className="text-4xl font-extrabold text-foreground">Events</h2>
                 <p className="max-w-[700px] mx-auto text-muted-foreground">
                     Discover our latest initiatives and upcoming activities. Join us in our journey of making a tangible impact in the lives of many.
                 </p>
             </div>
 
-            <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl">
                 {events.length === 0 ? (
                     <div className="col-span-1 md:col-span-2 lg:col-span-3 text-center py-20 text-muted-foreground">
                         No events found at the moment. Please check back later.

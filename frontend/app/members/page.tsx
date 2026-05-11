@@ -11,10 +11,10 @@ export default async function MembersPage() {
     return (
         <div className="flex flex-col w-full">
             {/* Hero Section */}
-            <section className="py-20 bg-primary text-primary-foreground text-center">
-                <div className="container mx-auto px-4 space-y-4">
-                    <h1 className="text-4xl md:text-5xl font-bold">Our Dedicated Team</h1>
-                    <p className="max-w-2xl mx-auto opacity-90 text-lg">
+            <section className="py-16 sm:py-20 bg-background text-center px-4">
+                <div className="mx-auto max-w-4xl rounded-3xl bg-primary px-5 sm:px-6 py-10 sm:py-14 text-primary-foreground shadow-sm space-y-4">
+                    <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold">Meet Our Members</h1>
+                    <p className="max-w-2xl mx-auto opacity-90 text-base sm:text-lg">
                         Meet the passionate individuals who work tirelessly to bring Swapnotthan's vision to life.
                     </p>
                 </div>

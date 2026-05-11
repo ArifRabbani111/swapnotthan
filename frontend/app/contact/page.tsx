@@ -16,7 +16,7 @@ export default function ContactPage() {
 
             <section className="py-24 bg-background">
                 <div className="container mx-auto px-4">
-                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 max-w-5xl mx-auto">
                         {/* Contact Info */}
                         <div className="space-y-8">
                             <div className="space-y-2">
@@ -31,7 +31,7 @@ export default function ContactPage() {
                                     </div>
                                     <div>
                                         <h4 className="font-bold">Our Location</h4>
-                                        <p className="text-sm text-muted-foreground">Dhaka, Bangladesh</p>
+                                        <p className="text-sm text-muted-foreground">Shahjalal University of Science and Technology (SUST), Sylhet, Bangladesh.</p>
                                     </div>
                                 </div>
 
@@ -41,7 +41,7 @@ export default function ContactPage() {
                                     </div>
                                     <div>
                                         <h4 className="font-bold">Call Us</h4>
-                                        <p className="text-sm text-muted-foreground">+880 1234 567890</p>
+                                        <p className="text-sm text-muted-foreground">+880 1976-007207</p>
                                     </div>
                                 </div>
 
@@ -51,7 +51,7 @@ export default function ContactPage() {
                                     </div>
                                     <div>
                                         <h4 className="font-bold">Email Us</h4>
-                                        <p className="text-sm text-muted-foreground">info@swapnotthan.org</p>
+                                        <p className="text-sm text-muted-foreground">swapnotthan@sust.edu</p>
                                     </div>
                                 </div>
                             </div>
