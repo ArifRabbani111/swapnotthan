@@ -25,7 +25,7 @@ export function EventsSection({ events }: EventsSectionProps) {
                 </p>
             </div>
 
-            <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl">
+            <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-4xl">
                 {events.length === 0 ? (
                     <div className="col-span-1 md:col-span-2 lg:col-span-3 text-center py-20 text-muted-foreground">
                         No events found at the moment. Please check back later.

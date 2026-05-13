@@ -19,7 +19,7 @@ export function Navbar() {
             <div className="container mx-auto flex h-20 items-center justify-between gap-2 px-3 sm:px-6 lg:px-8">
                 <div className="flex items-center gap-2">
                     <Link href="/" className="flex items-center space-x-2">
-                        <div className="relative h-10 w-10 md:h-12 md:w-12">
+                        <div className="relative h-8 w-8 md:h-10 md:w-10">
                             <Image
                                 src="/logo.png"
                                 alt="Swapnotthan Logo"
@@ -46,7 +46,7 @@ export function Navbar() {
 
                 <div className="flex items-center md:ml-8">
                     <Button
-                        className="h-9 rounded-full bg-red-600 px-2.5 text-[11px] text-white hover:bg-red-700 sm:h-10 sm:px-4 sm:text-sm shadow-[0_0_18px_rgba(220,38,38,0.75)] animate-pulse whitespace-nowrap"
+                        className="h-9 rounded-full bg-red-600 px-2.5 text-[11px] text-white hover:bg-red-700 sm:h-10 sm:px-4 sm:text-sm shadow-[0_0_20px_rgba(220,38,38,0.9)] animate-pulse whitespace-nowrap hover:shadow-[0_0_30px_rgba(220,38,38,1.0)] transition-all"
                         asChild
                     >
                         <Link href="tel:01612007207" aria-label="Blood Hotline 01612007207">
