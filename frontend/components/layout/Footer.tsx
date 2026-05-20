@@ -61,29 +61,48 @@ export function Footer() {
                     <p className="text-center text-xs font-semibold uppercase tracking-widest text-primary-foreground/70 mb-3">
                         Technology Partner
                     </p>
-                    <a
-                        href="https://chilekotha.top"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        title="Visit Chilekotha at chilekotha.top"
-                        className="mx-auto flex max-w-xs cursor-pointer items-center justify-center gap-3 rounded-lg border border-primary-foreground/20 bg-primary-foreground/5 px-4 py-2.5 transition-all hover:border-accent hover:bg-primary-foreground/10 hover:underline focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-primary"
-                    >
-                        <Image
-                            src="/chilekotha%20logo.jpeg"
-                            alt="Chilekotha"
-                            width={40}
-                            height={40}
-                            className="object-contain rounded-lg"
-                        />
-                        <div className="text-left">
-                            <span className="block text-sm font-bold tracking-tight text-primary-foreground">
-                                Chilekotha
+                    <div className="mx-auto flex max-w-2xl cursor-pointer items-center justify-center gap-4 flex-wrap">
+                        {/* Arif Rabbani */}
+                        <a
+                            href="https://arifrabbaniportfolio.netlify.app/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            title="Visit Arif Rabbani's Portfolio"
+                            className="flex items-center justify-center gap-2 rounded-lg border border-primary-foreground/20 bg-primary-foreground/5 px-4 py-2.5 transition-all hover:border-accent hover:bg-primary-foreground/10 hover:underline focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-primary"
+                        >
+                            <span className="text-sm font-bold tracking-tight text-primary-foreground">
+                                ARIF RABBANI
                             </span>
-                            <span className="block text-xs font-medium text-primary-foreground/70">
-                                chilekotha.top
-                            </span>
-                        </div>
-                    </a>
+                        </a>
+
+                        {/* Separator */}
+                        <span className="text-primary-foreground/40">&</span>
+
+                        {/* Chilekotha */}
+                        <a
+                            href="https://chilekotha.top"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            title="Visit Chilekotha at chilekotha.top"
+                            className="flex items-center justify-center gap-3 rounded-lg border border-primary-foreground/20 bg-primary-foreground/5 px-4 py-2.5 transition-all hover:border-accent hover:bg-primary-foreground/10 hover:underline focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-primary"
+                        >
+                            <Image
+                                src="/chilekotha%20logo.jpeg"
+                                alt="Chilekotha"
+                                width={40}
+                                height={40}
+                                className="object-contain rounded-lg"
+                            />
+                            <div className="text-left">
+                                <span className="block text-sm font-bold tracking-tight text-primary-foreground">
+                                    Chilekotha
+                                </span>
+                                <span className="block text-xs font-medium text-primary-foreground/70">
+                                    chilekotha.top
+                                </span>
+                            </div>
+                        </a>
+                    </div>
                 </div>
 
                 <div className="border-t border-primary-foreground/20 pt-4 text-center text-xs opacity-70">
