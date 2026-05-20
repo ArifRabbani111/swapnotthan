@@ -9,6 +9,7 @@ Monorepo: **frontend** (Next.js) and **backend** (Express API).
 
 ## Getting started
 
+
 ### Frontend (Next.js)
 
 ```bash
