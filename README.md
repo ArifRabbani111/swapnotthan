@@ -43,3 +43,6 @@ npm run dev
 4. Deploy. Vercel will run `npm install` and `npm run build` inside `frontend/`.
 
 Deploy the **backend** to Railway, Render, or another Node host.
+
+Small change: redeploy trigger update (2026-05-26).
+Redeploy trigger (again) — 2026-05-26.
