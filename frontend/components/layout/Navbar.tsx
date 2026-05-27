@@ -3,7 +3,8 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { Phone } from "lucide-react";
+import { Phone, Menu, X } from "lucide-react";
+import { useState } from "react";
 
 const navLinks = [
     { name: "Home", href: "/" },
@@ -14,12 +15,14 @@ const navLinks = [
 ];
 
 export function Navbar() {
+    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
     return (
         <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-            <div className="container mx-auto flex h-20 items-center justify-between gap-2 px-3 sm:px-6 lg:px-8">
-                <div className="flex items-center gap-2">
-                    <Link href="/" className="flex items-center space-x-2">
-                        <div className="relative h-8 w-8 md:h-10 md:w-10">
+            <div className="container mx-auto flex h-20 items-center justify-between gap-4 px-3 sm:px-6 lg:px-8">
+                <div className="flex items-center gap-4">
+                    <Link href="/" className="flex items-center gap-2.5">
+                        <div className="relative h-8 w-8 md:h-10 md:w-10 flex-shrink-0">
                             <Image
                                 src="/logo.png"
                                 alt="Swapnotthan Logo"
@@ -32,7 +35,7 @@ export function Navbar() {
                     </Link>
                 </div>
 
-                <nav className="hidden md:ml-auto md:flex gap-6 lg:gap-10">
+                <nav className="hidden md:flex md:ml-auto gap-6 lg:gap-10">
                     {navLinks.map((link) => (
                         <Link
                             key={link.name}
@@ -44,7 +47,7 @@ export function Navbar() {
                     ))}
                 </nav>
 
-                <div className="flex items-center md:ml-8">
+                <div className="flex items-center gap-3 md:gap-4">
                     <Button
                         className="h-9 rounded-full bg-red-600 px-2.5 text-[11px] text-white hover:bg-red-700 sm:h-10 sm:px-4 sm:text-sm shadow-[0_0_20px_rgba(220,38,38,0.9)] animate-pulse whitespace-nowrap hover:shadow-[0_0_30px_rgba(220,38,38,1.0)] transition-all"
                         asChild
@@ -55,8 +58,39 @@ export function Navbar() {
                             <span className="hidden sm:inline">Blood Hotline: 01612007207</span>
                         </Link>
                     </Button>
+
+                    {/* Mobile menu button */}
+                    <button
+                        className="md:hidden h-10 w-10 flex items-center justify-center rounded-lg hover:bg-muted transition-colors"
+                        onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                        aria-label="Toggle mobile menu"
+                    >
+                        {mobileMenuOpen ? (
+                            <X className="h-5 w-5" />
+                        ) : (
+                            <Menu className="h-5 w-5" />
+                        )}
+                    </button>
                 </div>
             </div>
+
+            {/* Mobile menu dropdown */}
+            {mobileMenuOpen && (
+                <div className="md:hidden border-t bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+                    <nav className="container mx-auto flex flex-col gap-1 px-3 py-3 sm:px-6">
+                        {navLinks.map((link) => (
+                            <Link
+                                key={link.name}
+                                href={link.href}
+                                onClick={() => setMobileMenuOpen(false)}
+                                className="px-3 py-2 text-sm font-medium rounded-lg transition-colors hover:bg-muted hover:text-primary"
+                            >
+                                {link.name}
+                            </Link>
+                        ))}
+                    </nav>
+                </div>
+            )}
         </header>
     );
 }
